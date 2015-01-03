@@ -1,0 +1,36 @@
+<h2 class="sub-header">投票列表</h2>
+    <div class="table-responsive">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>投票名称</th>
+            <th>添加日期</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+        <foreach name="votelist" item="vote">
+          <tr>
+            <td class="col-sm-2">{$vote.tp_name}</td>
+            <td class="col-sm-2">{$vote.tp_adddate}</td>
+            <td class="col-sm-2">
+                <a href="__MODULE__/viewvote/{$vote.tp_id}">查看票数</a> 
+                <a href="__MODULE__/modvote/{$vote.tp_id}">编辑</a> 
+                <a href="javascript:;" id="delvote_{$vote.tp_id}">删除</a>
+            </td>
+          </tr>
+        </foreach>
+        </tbody>
+      </table>
+      {$page}
+    </div>
+<script type="text/javascript">
+$(function () {
+    $("a[id^='delvote_']").click(function () {
+        if (confirm("确认要删除吗？")) {
+            var id = this.id.split("_");
+            location.href = "__MODULE__/delvote/"+id[1];
+        }
+    });
+});
+</script>

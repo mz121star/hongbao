@@ -1,0 +1,71 @@
+<h2 class="sub-header">修改精品活动</h2>
+<div class="row placeholders">
+    <div class="col-md-7">
+        <form id="addform" class="form-horizontal" role="form" method="post" action="__MODULE__/Index/savejxhd" enctype="multipart/form-data">
+        <input type="hidden" name="jxhd_id" value="{$jxhdinfo.jxhd_id}">
+            <div class="form-group">
+              <label for="userid" class="col-sm-2 control-label">活动名称</label>
+              <div class="col-sm-10">
+                <input type="text" class="form-control" id="jxhd_title" name="jxhd_title" value="{$jxhdinfo.jxhd_title}" required autofocus>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="password" class="col-sm-2 control-label">活动简介</label>
+              <div class="col-sm-10">
+                <input type="text" class="form-control" id="jxhd_desc" name="jxhd_desc" value="{$jxhdinfo.jxhd_desc}">
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="status" class="col-sm-2 control-label">活动内容</label>
+              <div class="col-sm-10">
+                  <script name="jxhd_content" id="jxhd_content">{$jxhdinfo.jxhd_content}</script>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="address" class="col-sm-2 control-label">宣传图片</label>
+              <div class="col-sm-10">
+                <input type="file" id="jxhd_image" name="jxhd_image">
+                <if condition="$jxhdinfo.jxhd_image neq ''">
+                      <img src="/upload/{$jxhdinfo.jxhd_image}" width="100" height="50">
+                      <input type="checkbox" name="deljxhd_image" value='{$jxhdinfo.jxhd_image}'>删除图片
+                 </if>
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="col-sm-offset-2 col-sm-10">
+                <button type="button" class="btn btn-default" id="addbtn">修改</button>
+              </div>
+            </div>
+          </form>
+  </div>
+</div>
+<script type="text/javascript">
+$(function () {
+    $("#addbtn").click(function () {
+        var jxhd_title = $("#jxhd_title").val();
+        if (!jxhd_title) {
+            alert("请填写活动名称");
+            return false;
+        }
+        var jxhd_desc = $("#jxhd_desc").val();
+        if (!jxhd_desc) {
+            alert("请填写活动简介");
+            return false;
+        }
+        $("#addform").submit();
+    });
+});
+</script>
+<script type="text/javascript " src="/ueditor/ueditor.config.js "></script>
+<script type="text/javascript " src="/ueditor/ueditor.all.js "></script>
+<script type="text/javascript">
+ var editor = UE.getEditor('jxhd_content', {
+    toolbars: [
+        ['fullscreen', 'source', 'undo', 'redo', 'simpleupload', 'insertimage']
+    ],
+    autoHeightEnabled: true,
+    autoFloatEnabled: true,
+    initialFrameHeight:250,
+    initialFrameWidth:520
+});
+</script>

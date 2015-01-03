@@ -1,0 +1,55 @@
+<h2 class="sub-header">修改投票</h2>
+<div class="row placeholders">
+    <div class="col-md-7">
+        <form id="addform" class="form-horizontal" role="form" method="post" action="__MODULE__/Vote/save" enctype="multipart/form-data">
+        <input type="hidden" name="tp_id" value="{$voteinfo.tp_id}">
+            <div class="form-group">
+              <label for="userid" class="col-sm-2 control-label">投票名称</label>
+              <div class="col-sm-10">
+                <input type="text" class="form-control" id="tp_name" name="tp_name" value="{$voteinfo.tp_name}">
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="userid" class="col-sm-2 control-label">投票描述</label>
+              <div class="col-sm-10">
+                <textarea name="tp_desc" id="tp_desc" rows="6" cols="75">{$voteinfo.tp_desc}</textarea>
+              </div>
+            </div>
+            <!-- <div class="form-group">
+              <label for="password" class="col-sm-2 control-label">投票选项</label>
+              <div class="col-sm-10">
+                <input type="text" class="form-control" id="vote_choose" name="vote_choose" value="" placeholder="添加后将不可更改">
+                每个选项间用空格区分
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="address" class="col-sm-2 control-label">食物图片</label>
+              <div class="col-sm-10">
+                <input type="file" id="food_image" name="food_image">
+              </div>
+            </div> -->
+            <div class="form-group">
+              <div class="col-sm-offset-2 col-sm-10">
+                <button type="button" class="btn btn-default" id="addbtn">修改</button>
+              </div>
+            </div>
+          </form>
+  </div>
+</div>
+<script type="text/javascript">
+$(function () {
+    $("#addbtn").click(function () {
+        var tp_name = $("#tp_name").val();
+        var tp_desc = $("#tp_desc").val();
+        if (!tp_name) {
+            alert("请填写投票名称");
+            return false;
+        }
+        if (!tp_desc) {
+            alert("请填写投票描述");
+            return false;
+        }
+        $("#addform").submit();
+    });
+});
+</script>

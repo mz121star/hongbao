@@ -1,0 +1,159 @@
+<h2 class="sub-header">修改菜肴</h2>
+<div class="row placeholders">
+    <div class="col-md-7">
+        <form id="addform" class="form-horizontal" role="form" method="post" action="__MODULE__/Food/save" enctype="multipart/form-data">
+        <input type="hidden" name="food_id" value="{$foodinfo.food_id}">
+            <div class="form-group">
+              <label for="userid" class="col-sm-2 control-label">菜名</label>
+              <div class="col-sm-10">
+                <input type="text" class="form-control" id="food_name" name="food_name" value="{$foodinfo.food_name}" required autofocus>
+              </div>
+            </div>
+           <div class="form-group">
+              <label for="address" class="col-sm-2 control-label">期数</label>
+              <div class="col-sm-10">
+                <input type="text" class="form-control" id="food_qishu" name="food_qishu" value="{$foodinfo.food_qishu}" placeholder="秋葵350g，鲜虾200g">
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="password" class="col-sm-2 control-label">食材</label>
+              <div class="col-sm-10">
+                  <script name="food_shicai" id="food_shicai">{$foodinfo.food_shicai}</script>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="status" class="col-sm-2 control-label">辅材</label>
+              <div class="col-sm-10">
+                  <script name="food_fucai" id="food_fucai">{$foodinfo.food_fucai}</script>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="type1" class="col-sm-2 control-label">准备工作</label>
+              <div class="col-sm-10">
+                  <script name="food_zhunbei" id="food_zhunbei">{$foodinfo.food_zhunbei}</script>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="description" class="col-sm-2 control-label">制作步骤</label>
+              <div class="col-sm-10">
+                  <script name="food_buzhou" id="food_buzhou">{$foodinfo.food_buzhou}</script>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="address" class="col-sm-2 control-label">其他</label>
+              <div class="col-sm-10">
+                  <script name="food_qita" id="food_qita">{$foodinfo.food_qita}</script>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="address" class="col-sm-2 control-label">菜肴描述</label>
+              <div class="col-sm-10">
+                  <script name="food_desc" id="food_desc">{$foodinfo.food_desc}</script>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="address" class="col-sm-2 control-label">制作难度</label>
+              <div class="col-sm-10">
+                <select class="form-control" name="food_difficulty">
+                    <option value="">请选择制作难度</option>
+                    <option value="1" <if condition="$foodinfo['food_difficulty'] eq '1'">selected</if>>入门级</option>
+                    <option value="2" <if condition="$foodinfo['food_difficulty'] eq '2'">selected</if>>初级</option>
+                    <option value="3" <if condition="$foodinfo['food_difficulty'] eq '3'">selected</if>>中级</option>
+                    <option value="4" <if condition="$foodinfo['food_difficulty'] eq '4'">selected</if>>高级</option>
+                    <option value="5" <if condition="$foodinfo['food_difficulty'] eq '5'">selected</if>>大师级</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="address" class="col-sm-2 control-label">食物图片</label>
+              <div class="col-sm-10">
+                <input type="file" id="food_image" name="food_image">
+                <if condition="$foodinfo.food_image neq ''">
+                      <img src="/upload/{$foodinfo.food_image}" width="100" height="50">
+                      <input type="checkbox" name="delfood_image" value='{$foodinfo.food_image}'>删除图片
+                 </if>
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="col-sm-offset-2 col-sm-10">
+                <button type="button" class="btn btn-default" id="addbtn">修改</button>
+              </div>
+            </div>
+          </form>
+  </div>
+</div>
+<script type="text/javascript">
+$(function () {
+    $("#addbtn").click(function () {
+        var food_name = $("#food_name").val();
+        if (!food_name) {
+            alert("请填写菜名");
+            return false;
+        }
+        $("#addform").submit();
+    });
+});
+</script>
+<script type="text/javascript " src="/ueditor/ueditor.config.js "></script>
+<script type="text/javascript " src="/ueditor/ueditor.all.js "></script>
+<script type="text/javascript">
+ var editor = UE.getEditor('food_shicai', {
+    toolbars: [
+        ['fullscreen', 'source', 'undo', 'redo', 'simpleupload', 'insertimage']
+    ],
+    autoHeightEnabled: true,
+    autoFloatEnabled: true,
+    initialFrameHeight:100,
+    initialFrameWidth:520
+});
+
+ var editor = UE.getEditor('food_fucai', {
+    toolbars: [
+        ['fullscreen', 'source', 'undo', 'redo', 'simpleupload', 'insertimage']
+    ],
+    autoHeightEnabled: true,
+    autoFloatEnabled: true,
+    initialFrameHeight:100,
+    initialFrameWidth:520
+});
+
+ var editor = UE.getEditor('food_zhunbei', {
+    toolbars: [
+        ['fullscreen', 'source', 'undo', 'redo', 'simpleupload', 'insertimage']
+    ],
+    autoHeightEnabled: true,
+    autoFloatEnabled: true,
+    initialFrameHeight:100,
+    initialFrameWidth:520
+});
+
+ var editor = UE.getEditor('food_buzhou', {
+    toolbars: [
+        ['fullscreen', 'source', 'undo', 'redo', 'simpleupload', 'insertimage']
+    ],
+    autoHeightEnabled: true,
+    autoFloatEnabled: true,
+    initialFrameHeight:100,
+    initialFrameWidth:520
+});
+
+ var editor = UE.getEditor('food_qita', {
+    toolbars: [
+        ['fullscreen', 'source', 'undo', 'redo', 'simpleupload', 'insertimage']
+    ],
+    autoHeightEnabled: true,
+    autoFloatEnabled: true,
+    initialFrameHeight:100,
+    initialFrameWidth:520
+});
+
+ var editor = UE.getEditor('food_desc', {
+    toolbars: [
+        ['fullscreen', 'source', 'undo', 'redo', 'simpleupload', 'insertimage']
+    ],
+    autoHeightEnabled: true,
+    autoFloatEnabled: true,
+    initialFrameHeight:100,
+    initialFrameWidth:520
+});
+</script>

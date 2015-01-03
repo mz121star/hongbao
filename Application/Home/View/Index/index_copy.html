@@ -1,0 +1,88 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html;charset=utf-8" />
+    <meta name="author" content="www.frebsite.nl" />
+    <meta name="viewport" content="width=device-width initial-scale=1.0 maximum-scale=1.0 user-scalable=yes" />
+
+    <title>今天吃点啥</title>
+    <link href="img/favicon.ico" rel="shortcut icon" type="image/x-icon">
+
+    <link type="text/css" rel="stylesheet" href="/mobile/css/font-awesome.min.css" />
+    <link type="text/css" rel="stylesheet" href="/mobile/css/flexslider.css" />
+    <link type="text/css" rel="stylesheet" href="/mobile/css/jquery.mmenu.all.css" />
+    <link type="text/css" rel="stylesheet" href="/mobile/css/style.css" />
+
+    <script type="text/javascript" src="/mobile/js/jquery.min.js"></script>
+    <script type="text/javascript" src="/mobile/js/jquery.mmenu.min.all.js"></script>
+    <script type="text/javascript" src="/mobile/js/jquery.flexslider.js"></script>
+    <script type="text/javascript" src="/mobile/js/o-script.js"></script>
+    <script type="text/javascript" src="/js/jquery.tipswindow-2.2.js"></script>
+    <link rel="stylesheet" href="/mobile/css/ali/iconfont.css">
+
+</head>
+<body class="o-page">
+<div id="page">
+<!-- Header -->
+<div id="header">
+    <a href="#menu"><i class="fa fa-bars"></i> </a>
+				<span id="Logo" class="svg">
+					今天吃点啥
+				</span>
+    <a class="backBtn" href="@">  </a>
+</div>
+<div class="subHeader">
+
+    <div class="list_tab"><!--<div class="list_tab fixed"> -->
+        <a href="__MODULE__/index/index?search_name={$search_name}" class="tab1 <if condition="$order eq ''">current-tab</if>" id="popupDialog-type">综合最佳</a>
+        <a href="__MODULE__/index/index?order=favmost&search_name={$search_name}" class="tab2 <if condition="$order eq 'favmost'">current-tab</if>" id="popupDialog-time">收藏最多</a>
+        <a href="__MODULE__/index/index?order=dif&search_name={$search_name}" class="tab3 <if condition="$order eq 'dif'">current-tab</if>">最容易做</a>
+    </div>
+
+
+</div>
+<foreach name="foodlist" item="food">
+<div class="geo-rst-list">
+<a class="grst-block " href="__MODULE__/detail/{$food.food_id}">
+    <img class="grst-logo" width="42" height="42" alt="{$food.food_name}" src="/upload/{$food.food_image}">
+    <div class="grst-detail">
+        <div class="grst-name">
+            <span   class="ng-binding">{$food.food_qishu} {$food.food_name}</span>
+        </div>
+         <div class="grst-status "  >
+      <span class="bookable " >{$food.favcount|default=0}人收藏</span>
+  </div>
+        <div class="grst-misc">
+            <span >{$food.food_adddate}</span>
+        </div>
+    </div>
+</a>
+      </div>
+</foreach>
+
+
+<!-- Content -->
+
+
+<!-- Menu navigation -->
+<style>
+    .mm-search{display:none}
+</style>
+<script>
+    $(function () {
+        $("#logout").on("click",function(){
+            if (confirm('确定要退出登录吗？')) {
+                location.href = "__MODULE__/index/logout";
+            }
+
+        })
+    });
+
+</script>
+<include file="Index:leftbar"/>
+</div>
+
+
+</body>
+</html>

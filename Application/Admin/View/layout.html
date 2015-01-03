@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>伟诗微信公众平台</title>
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/dashboard.css" rel="stylesheet">
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="/js/ie10-viewport-bug-workaround.js"></script>
+    <!--[if lt IE 9]>
+      <script src="/js/html5shiv.js"></script>
+      <script src="/js/respond.min.js"></script>
+    <![endif]-->
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/docs.min.js"></script>
+  </head>
+  <body>
+
+    <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="__MODULE__/Index">伟诗微信公众平台</a>
+        </div>
+        <div class="navbar-collapse collapse">
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="__MODULE__/Index/logout">Logout</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-sm-3 col-md-2 sidebar">
+          
+          <ul class="nav nav-sidebar">
+             <li <if condition="$current_c eq 'Food' and $current_a eq 'list'">class="active"</if>><a href="__MODULE__/Food/list">菜肴管理</a></li>
+             <li <if condition="$current_c eq 'Food' and $current_a eq 'add'">class="active"</if>><a href="__MODULE__/Food/add">添加菜肴</a></li>
+          </ul>
+
+          <ul class="nav nav-sidebar">
+             <li <if condition="$current_c eq 'Vote' and $current_a eq 'list'">class="active"</if>><a href="__MODULE__/Vote/list">投票管理</a></li>
+             <li <if condition="$current_c eq 'Vote' and $current_a eq 'add'">class="active"</if>><a href="__MODULE__/Vote/add">添加新投票</a></li>
+          </ul>
+
+          <ul class="nav nav-sidebar">
+             <li <if condition="$current_c eq 'Index' and $current_a eq 'jxhd'">class="active"</if>><a href="__MODULE__/Index/jxhd">精选活动列表</a></li>
+             <li <if condition="$current_c eq 'Index' and $current_a eq 'addjxhd'">class="active"</if>><a href="__MODULE__/Index/addjxhd">添加新活动</a></li>
+          </ul>
+            
+            <ul class="nav nav-sidebar">
+             <li <if condition="$current_c eq 'Index' and $current_a eq 'jxsp'">class="active"</if>><a href="__MODULE__/Index/jxsp">精选商品列表</a></li>
+             <li <if condition="$current_c eq 'Index' and $current_a eq 'addjxsp'">class="active"</if>><a href="__MODULE__/Index/addjxsp">添加精选商品</a></li>
+          </ul>
+            
+<!--            <ul class="nav nav-sidebar">
+             <li <if condition="$current_c eq 'Index' and $current_a eq 'weixin'">class="active"</if>><a href="__MODULE__/Index/weixin">微信菜单</a></li>
+          </ul>-->
+
+        </div>
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+          {__CONTENT__}
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
