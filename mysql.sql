@@ -14,6 +14,17 @@ CREATE TABLE `hongbao_user` (
 INSERT INTO `hongbao_user` VALUES (1, 'admin', '管理员',  '21232f297a57a5a743894a0e4a801fc3', now(), '', '1');
 
 
+DROP TABLE IF EXISTS `hongbao_money`;
+CREATE TABLE `hongbao_money` (
+  `money_id` int(11) NOT NULL auto_increment,
+  `money_owner` varchar(50) NOT NULL,
+  `money_number` int(11) unsigned NOT NULL default 0,
+  `money_from` varchar(50) NOT NULL COMMENT '原则上关联user表的user_id字段，当是初始资金时保存0',
+  `money_time` datetime NOT NULL,
+  PRIMARY KEY (`money_id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='资金表';
+
+
 DROP TABLE IF EXISTS `hongbao_setting`;
 CREATE TABLE `hongbao_setting` (
   `set_id` int(11) NOT NULL auto_increment,

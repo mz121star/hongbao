@@ -13,10 +13,4 @@ class BaseController extends Controller {
         $this->assign('current_c', MODULE_NAME);
         $this->assign('current_a', ACTION_NAME);
     }
-    
-    public function checklogin() {
-        if (!$this->userInfo['user_id']) {
-            echo '请先关注公众号后浏览本内容';exit;
-        }
-    }
 }
