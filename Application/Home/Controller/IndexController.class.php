@@ -59,7 +59,10 @@ class IndexController extends BaseController {
                 $my_money_list[] = $my_money;
             }
             
-            $totel_money = $money->where('money_owner = "'.$userinfo['openid'].'"')->count('money_number');
+            $totel_money_list = $money->where('money_owner = "'.$userinfo['openid'].'"')->select();
+            foreach ($totel_money_list as $value) {
+                $totel_money = $totel_money + $value['money_number'];
+            }
         }
 
         if ($parent) {
