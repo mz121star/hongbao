@@ -34,3 +34,17 @@ CREATE TABLE `hongbao_setting` (
   `set_untildate` datetime NOT NULL  COMMENT '活动截止日期',
   PRIMARY KEY (`set_id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='设置表';
+
+
+DROP TABLE IF EXISTS `hongbao_tixian`;
+CREATE TABLE `hongbao_tixian` (
+  `tx_id` int(11) NOT NULL auto_increment,
+  `tx_userid` varchar(50) NOT NULL,
+  `tx_name` varchar(50) NOT NULL  COMMENT '收款姓名',
+  `tx_phone` varchar(50) NOT NULL  COMMENT '手机号码',
+  `tx_type` enum('1','2') NOT NULL COMMENT '提现方式，1是支付宝，2是银行卡',
+  `tx_card` varchar(50) NOT NULL  COMMENT '提现帐号或卡号',
+  `tx_number` varchar(50) NOT NULL  COMMENT '提现金额',
+  `tx_date` datetime  NOT NULL  COMMENT '提现日期',
+  PRIMARY KEY (`tx_id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='提现表';
