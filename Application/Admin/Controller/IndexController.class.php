@@ -2,7 +2,7 @@
 namespace Admin\Controller;
 
 class IndexController extends BaseController {
-    
+
     public function picAction() {
         $userobj = M("user");
         $count = $userobj->where('user_image != ""')->count();
@@ -12,6 +12,43 @@ class IndexController extends BaseController {
         $this->assign('page',$show);
         $this->assign('userlist', $userlist);
         $this->display();
+    }
+
+    public function txlistAction() {
+        $tixian = M("tixian");
+        $count = $tixian->count();
+        $page = new \Think\Page($count, 20);
+        $txlist = $tixian->order('tx_date desc')->limit($page->firstRow.','.$page->listRows)->select();
+        $show = $page->show();
+        $this->assign('page',$show);
+        $this->assign('txlist', $txlist);
+        $this->display();
+    }
+
+    public function txdetailAction() {
+        $tx_id = I('get.id');
+        $tixian = M("tixian");
+        $txinfo = $tixian->where('tx_id = "'.$tx_id.'"')->find();
+        if (!$txinfo) {
+            $this->error("未知的提现申请");
+        }
+        $this->assign('txinfo', $txinfo);
+        $this->display();
+    }
+
+    public function modtxAction() {
+        $tx_id = I('get.id');
+        $tixian = M("tixian");
+        $txinfo = $tixian->where('tx_id = "'.$tx_id.'"')->find();
+        if (!$txinfo) {
+            $this->error("未知的提现申请");
+        }
+        $isok = $tixian->where('tx_id = "'.$tx_id.'"')->setField('tx_status', '1');
+        if($isok){
+            $this->success('状态修改成已转账');
+        } else {
+            $this->error('状态修改失败');
+        }
     }
 
     public function indexAction(){
