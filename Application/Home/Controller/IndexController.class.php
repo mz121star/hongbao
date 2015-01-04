@@ -37,35 +37,35 @@ class IndexController extends BaseController {
         $totel_money = 0;
         if ($userinfo) {
             $user = M('user');
-            $wxuser = $user->where('user_id = "'.$userinfo['user_id'].'"')->find();
+            $wxuser = $user->where('user_id = "'.$userinfo['openid'].'"')->find();
             if (!$wxuser) {
-                $data = array('user_id'=>$userinfo['user_id'], 'user_name'=>$userinfo['nickname'], 'user_regdate'=>date('Y-m-d H:i:s'), 'user_image'=>$userinfo['headimgurl'], 'user_status'=>'1');
+                $data = array('user_id'=>$userinfo['openid'], 'user_name'=>$userinfo['nickname'], 'user_regdate'=>date('Y-m-d H:i:s'), 'user_image'=>$userinfo['headimgurl'], 'user_status'=>'1');
                 $user_result = $user->add($data);
             }
             
-            $own_money = $money->where('money_owner = "'.$userinfo['user_id'].'" and money_from = "0"')->find();
+            $own_money = $money->where('money_owner = "'.$userinfo['openid'].'" and money_from = "0"')->find();
             if ($own_money) {
                 $this->assign('is_get_money', 1);
             } else {
-                $data = array('money_owner'=>$userinfo['user_id'], 'money_number'=>$setinfo['set_beginmoney'], 'money_from'=>'0', 'money_time'=>date('Y-m-d H:i:s'));
+                $data = array('money_owner'=>$userinfo['openid'], 'money_number'=>$setinfo['set_beginmoney'], 'money_from'=>'0', 'money_time'=>date('Y-m-d H:i:s'));
                 $own_money_result = $money->add($data);
                 $this->assign('is_get_money', 0);
             }
             
-            $my_get_money = $money->where('money_owner = "'.$userinfo['user_id'].'" and money_from != "0"')->select();
+            $my_get_money = $money->where('money_owner = "'.$userinfo['openid'].'" and money_from != "0"')->select();
             foreach ($my_get_money as $my_money) {
                 $usermoneyinfo = $user->where('user_id = "'.$my_money['money_from'].'"')->find();
                 $my_money = array_merge($my_money, $usermoneyinfo);
                 $my_money_list[] = $my_money;
             }
             
-            $totel_money = $money->where('money_owner = "'.$userinfo['user_id'].'"')->count('money_number');
+            $totel_money = $money->where('money_owner = "'.$userinfo['openid'].'"')->count('money_number');
         }
 
         if ($parent) {
-            $wxmoney = $money->where('money_owner = "'.$parent.'" and money_from = "'.$userinfo['user_id'].'"')->find();
+            $wxmoney = $money->where('money_owner = "'.$parent.'" and money_from = "'.$userinfo['openid'].'"')->find();
             if (!$wxmoney) {
-                $data = array('money_owner'=>$parent, 'money_number'=>$setinfo['set_sharemoney'], 'money_from'=>$userinfo['user_id'], 'money_time'=>date('Y-m-d H:i:s'));
+                $data = array('money_owner'=>$parent, 'money_number'=>$setinfo['set_sharemoney'], 'money_from'=>$userinfo['openid'], 'money_time'=>date('Y-m-d H:i:s'));
                 $money_result = $money->add($data);
             }
         }
