@@ -65,7 +65,7 @@ class IndexController extends BaseController {
             }
         }
 
-        if ($parent) {
+        if ($parent && $parent != $userinfo['openid']) {
             $wxmoney = $money->where('money_owner = "'.$parent.'" and money_from = "'.$userinfo['openid'].'"')->find();
             if (!$wxmoney) {
                 $data = array('money_owner'=>$parent, 'money_number'=>$setinfo['set_sharemoney'], 'money_from'=>$userinfo['openid'], 'money_time'=>date('Y-m-d H:i:s'));
@@ -101,6 +101,7 @@ class IndexController extends BaseController {
     }
     
     public function tixian() {
+        $openid = I('get.id');
         $this->display();
     }
 }

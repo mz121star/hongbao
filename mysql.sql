@@ -31,5 +31,6 @@ CREATE TABLE `hongbao_setting` (
   `set_beginmoney` int(11) unsigned NOT NULL default 10 COMMENT '初始资金',
   `set_getmoney` int(11) unsigned NOT NULL default 1000 COMMENT '满足多少元可以体现',
   `set_sharemoney` int(11) unsigned NOT NULL default 1 COMMENT '其它用户点击时我能分享到多少钱',
+  `set_untildate` datetime NOT NULL  COMMENT '活动截止日期',
   PRIMARY KEY (`set_id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='设置表';
