@@ -10,14 +10,6 @@ $private_config = array(
                         'URL_CASE_INSENSITIVE' =>true,
                         'URL_ROUTE_RULES' => array(
                                                   'modfood/:foodid' => 'Food/modfood',
-                                                  'delfood/:foodid' => 'Food/delfood',
-                                                  'modvote/:voteid' => 'Vote/modvote',
-                                                  'delvote/:voteid' => 'Vote/delvote',
-                                                  'deljxhd/:hdid' => 'Index/deljxhd',
-                                                  'modjxhd/:hdid' => 'Index/modjxhd',
-                                                  'viewvote/:voteid' => 'Vote/view',
-                                                  'deljxsp/:spid' => 'Index/deljxsp',
-                                                  'modjxsp/:spid' => 'Index/modjxsp',
                                                   )
                         );
 
