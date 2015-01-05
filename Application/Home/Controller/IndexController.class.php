@@ -42,12 +42,13 @@ class IndexController extends BaseController {
             $openid = $json_obj['openid'];
             session(array('name'=>'access_token_id', 'expire'=>$json_obj['expires_in']));
             session('refresh_token', $json_obj['refresh_token']);
-        } else {
-            $url ="https://api.weixin.qq.com/sns/oauth2/refresh_token?appid=".$this->app_id."&grant_type=refresh_token&refresh_token=".$refresh_token;
+        }
+        else {
+       /*     $url ="https://api.weixin.qq.com/sns/oauth2/refresh_token?appid=".$this->app_id."&grant_type=refresh_token&refresh_token=".$refresh_token;
             $json_content = file_get_contents($url);
             $json_obj = json_decode($json_content, true);
             $access_token = $json_obj['access_token'];
-            $openid = $json_obj['openid'];
+            $openid = $json_obj['openid'];*/
         }
 
         $userinfostr = file_get_contents("https://api.weixin.qq.com/sns/userinfo?access_token=".$access_token."&openid=".$openid."&lang=zh_CN");
