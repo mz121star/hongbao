@@ -146,6 +146,7 @@ class IndexController extends BaseController {
 
         $tixian = M("tixian");
         unset($post['tx_card2']);
+        unset($post['totel_money']);
         $post['tx_date'] = date('Y-m-d H:i:s');
         $isok = $tixian->add($post);
         if ($isok) {
