@@ -105,12 +105,12 @@ $(function () {
             alert("两次输入的卡号或帐号不一致");
             return false;
         }
-        var tx_number = $("#tx_number").val();
+        var tx_number = parseFloat($("#tx_number").val());
         if (!tx_number) {
             alert("请填写想要提现的金额");
             return false;
         }
-        var totel_money = $("#totel_money").val();
+        var totel_money = parseFloat($("#totel_money").val());
         if (totel_money < tx_number) {
             alert("最多只能提现"+totel_money+"元");
             return false;
