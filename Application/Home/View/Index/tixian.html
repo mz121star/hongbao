@@ -23,8 +23,6 @@
 <form name="tixianform" id="tixianform" method="post" action="__MODULE__/Index/savetx">
 <input type="hidden" name="totel_money" id="totel_money" value="{$totel_money}">
 <input type="hidden" name="tx_userid" id="tx_userid" value="{$openid}">
-<input type="hidden" name="parentid" id="parentid" value="{$parentid}">
-<input type="hidden" name="code" id="code" value="{$code}">
 <div>
 <div class="head">
 <span class="left">红包有效期</span>
@@ -75,7 +73,7 @@
 <hr>
 </div>
 </div>
-<div class="return"><a href="__MODULE__/index/index?parent={$parentid}&code={$code}">返回红包列表</a></div>
+<div class="return"><a href="__MODULE__/index/index">返回红包列表</a></div>
 </form>
 <script src="/js/vendor/jquery-1.10.2.min.js"></script>
 <script src="/js/hammer.min.js"></script>

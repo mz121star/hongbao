@@ -19,16 +19,36 @@ class IndexController extends BaseController {
         }
         $this->redirect('index/'.$actionto);
     }
+    
+    public function gotoOauthAction() {
+        $parent = I('get.parentid');
+        $redirect_url = urlencode('http://'.$_SERVER['SERVER_NAME'].'/index.php/index/index?parentid='.$parent);
+        $gotourl = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid='.$this->app_id.'&redirect_uri='.$redirect_url.'&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect';
+        $this->redirect($gotourl);
+    }
 
-    public function indexAction(){
+    public function indexAction() {
+        $refresh_token = session('refresh_token');
         $parent = I('get.parentid');
         $code = I('get.code');
-
-        $url ="https://api.weixin.qq.com/sns/oauth2/access_token?appid=".$this->app_id."&secret=".$this->app_secret."&code=".$code."&grant_type=authorization_code";
-        $json_content = file_get_contents($url);
-        $json_obj = json_decode($json_content, true);
-        $access_token = $json_obj['access_token'];
-        $openid = $json_obj['openid'];
+        if (!$refresh_token) {
+            if (!$code) {
+                $this->redirect('gotoOauth', array('parentid' => $parent));
+            }
+            $url ="https://api.weixin.qq.com/sns/oauth2/access_token?appid=".$this->app_id."&secret=".$this->app_secret."&code=".$code."&grant_type=authorization_code";
+            $json_content = file_get_contents($url);
+            $json_obj = json_decode($json_content, true);
+            $access_token = $json_obj['access_token'];
+            $openid = $json_obj['openid'];
+            session(array('name'=>'access_token_id', 'expire'=>$json_obj['expires_in']));
+            session('refresh_token', $json_obj['refresh_token']);
+        } else {
+            $url ="https://api.weixin.qq.com/sns/oauth2/refresh_token?appid=".$this->app_id."&grant_type=refresh_token&refresh_token=".$refresh_token;
+            $json_content = file_get_contents($url);
+            $json_obj = json_decode($json_content, true);
+            $access_token = $json_obj['access_token'];
+            $openid = $json_obj['openid'];
+        }
 
         $userinfostr = file_get_contents("https://api.weixin.qq.com/sns/userinfo?access_token=".$access_token."&openid=".$openid."&lang=zh_CN");
         $userinfo = json_decode($userinfostr, true);
@@ -112,8 +132,6 @@ class IndexController extends BaseController {
     
     public function tixianAction() {
         $openid = I('get.openid');
-        $parentid = I('get.parentid');
-        $code = I('get.code');
         $setting = M("setting");
         $setinfo = $setting->where('set_id = 1')->find();
         $untildate = strtotime($setinfo['set_untildate']);
@@ -129,16 +147,11 @@ class IndexController extends BaseController {
         $this->assign('totel_money', $wxuser['user_money']);
         $this->assign('setinfo', $setinfo);
         $this->assign('openid', $openid);
-        
-        $this->assign('parentid', $parentid);
-        $this->assign('code', $code);
         $this->display();
     }
 
     public function savetxAction() {
         $post = filterAllParam('post');
-        $parentid = $post['parentid'];
-        $code = $post['code'];
 
         $setting = M("setting");
         $setinfo = $setting->where('set_id = 1')->find();
@@ -157,13 +170,11 @@ class IndexController extends BaseController {
         $tixian = M("tixian");
         unset($post['tx_card2']);
         unset($post['totel_money']);
-        unset($post['code']);
-        unset($post['parentid']);
         $post['tx_date'] = date('Y-m-d H:i:s');
         $isok = $tixian->add($post);
         if ($isok) {
             $user->where('user_id = "'.$post['tx_userid'].'"')->setDec('user_money', $post['tx_number']);
-            $this->success('提现成功', U('index/index?parentid='.$parentid.'&code='.$code));
+            $this->success('提现成功', U('index/index'));
         } else {
             $this->error("提现失败");
         }
