@@ -63,7 +63,12 @@
 <div id="mcover" onclick="document.getElementById('mcover').style.display='';" style="display: block;">
     <img src="img/share.png" style="display: none">
     <div class="zhongjiangtip">
+        <if condition="$is_get_money eq 0">
         <p class="  p3 css4401D34FA9112B9D66D0782EE9A1D68F">恭喜{$userinfo.nickname}您获得<span class="yellow num3">{$setinfo.set_beginmoney}</span>元红包</p>
+        </if>
+        <if condition="$is_get_money eq 1">
+        <p class="  p3 css4401D34FA9112B9D66D0782EE9A1D68F">恭喜{$userinfo.nickname}您目前共获得了<span class="yellow num3">{$totel_money}</span>元红包</p>
+        </if>
         <p class="  p3 css4401D34FA9112B9D66D0782EE9A1D68F">关注微信可申请提现</p>
         <p class="guanzhu">点此关注公众账户</p>
     </div>
