@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="/css/normalize.css">
     <link rel="stylesheet" href="/css/main.css">
     <script src="/js/vendor/modernizr-2.6.2.min.js"></script>
+ 
 
 
 </head>
@@ -57,7 +58,12 @@
 <div id="mcover" onclick="document.getElementById('mcover').style.display='';" style="display: block;">
     <img src="img/share.png" style="display: none">
     <div class="zhongjiangtip">
+        <if condition="$is_get_money eq 0">
         <p class="  p3 css4401D34FA9112B9D66D0782EE9A1D68F">恭喜{$userinfo.nickname}您获得<span class="yellow num3">{$setinfo.set_beginmoney}</span>元红包</p>
+        </if>
+        <if condition="$is_get_money eq 1">
+        <p class="  p3 css4401D34FA9112B9D66D0782EE9A1D68F">恭喜{$userinfo.nickname}您目前共获得了<span class="yellow num3">{$totel_money}</span>元红包</p>
+        </if>
         <p class="  p3 css4401D34FA9112B9D66D0782EE9A1D68F">关注微信可申请提现</p>
         <p class="guanzhu">点此关注公众账户</p>
     </div>
@@ -75,8 +81,8 @@
 $(function(){
     var imgUrl = document.location.origin + "/img/force.png";
 
-    //var lineLink ='https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxc43356a7940e32d4&redirect_uri=http%3A%2F%2Fhongbao.webs.dlwebs.com%2Findex.php?parentid={$userinfo.openid}&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect';
-    var lineLink ='http://hongbao.webs.dlwebs.com/index.php/index/index?parentid={$userinfo.openid}';
+//    var lineLink ='https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxc43356a7940e32d4&redirect_uri=http%3A%2F%2Fhongbao.webs.dlwebs.com%2Findex.php?parentid={$userinfo.openid}&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect';
+var lineLink ='https://hongbao.webs.dlwebs.com/index.php/index/index?parentid={$userinfo.openid}';
     var descContent = "领红包拿大奖！哈蓝送您100元红包大礼！";
 
     var shareTitle = '哈蓝送红包，还不快来领！';
