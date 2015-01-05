@@ -86,7 +86,8 @@
             "imgUrl":document.location.origin+"/img/force.png",
             "link":'https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxc43356a7940e32d4&redirect_uri=http%3A%2F%2Fhongbao.webs.dlwebs.com%2Findex.php?parentid={$userinfo.openid}&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect',
             "desc":'领红包拿大奖！哈蓝送您100元红包大礼！',
-            "title":"哈蓝送红包，还不快来领！"
+            "title":"哈蓝送红包，还不快来领！",
+            "appid":"wxc43356a7940e32d"
         };
 // 分享的回调
         var wxCallbacks = {
@@ -124,6 +125,8 @@
 // 点击分享到腾讯微博，会执行下面这个代码
         Api.shareToWeibo(wxData, wxCallbacks);
     });
+
+
 
 </script>
 

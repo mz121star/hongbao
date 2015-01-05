@@ -134,6 +134,7 @@
                             "title":theData.desc,
                             "img_width":"640",
                             "img_height":"640"
+
                         };
                     }
                     WeixinApi["_wx_loadedCb_"](theData);
