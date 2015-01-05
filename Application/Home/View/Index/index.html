@@ -30,7 +30,8 @@
             <li>
                 <img width="40px" style="border-radius: 50px" src="{$mymoney.user_image}">
                 <div class="qian" >{$mymoney.money_number}元</div>
-                <div>{$mymoney.user_name}  {$mymoney.money_time} </div><br>
+                <div>{$mymoney.user_name}  </div><br>
+                <div> {$mymoney.money_time}</div>
                 <div>小手一抖 红包到手 </div>
             </li>
             </foreach>
@@ -38,7 +39,7 @@
     </div>
     <div class="info">
         <img src="/img/force.png" class="infopic">
-        <div  class="qianshu">{$totel_money}<span>元</span></div>
+        <div  class="qianshu">￥{$totel_money} </div>
         <div style="color: #fff; font-family: 微软雅黑">邀请好友参与，红包马上变大</div>
         <div style="clear: both;height: 60px;margin-top: 10px">
             <a class="guanzhu twocol" onclick="$('.zhongjiangtip').hide();$('#mcover').show();$('#mcover img').show()">邀请好友</a>
