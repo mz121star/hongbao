@@ -83,6 +83,9 @@ class IndexController extends BaseController {
         $this->assign('userinfo', $userinfo);
         $this->assign('setinfo', $setinfo);
         $this->assign('totel_money', $totel_money);
+        
+        $this->assign('parentid', $parent);
+        $this->assign('code', $code);
         $this->display();
     }
 
@@ -109,6 +112,8 @@ class IndexController extends BaseController {
     
     public function tixianAction() {
         $openid = I('get.openid');
+        $parentid = I('get.parentid');
+        $code = I('get.code');
         $setting = M("setting");
         $setinfo = $setting->where('set_id = 1')->find();
         $untildate = strtotime($setinfo['set_untildate']);
@@ -124,11 +129,16 @@ class IndexController extends BaseController {
         $this->assign('totel_money', $wxuser['user_money']);
         $this->assign('setinfo', $setinfo);
         $this->assign('openid', $openid);
+        
+        $this->assign('parentid', $parentid);
+        $this->assign('code', $code);
         $this->display();
     }
 
     public function savetxAction() {
         $post = filterAllParam('post');
+        $parentid = $post['parentid'];
+        $code = $post['code'];
 
         $setting = M("setting");
         $setinfo = $setting->where('set_id = 1')->find();
@@ -147,11 +157,13 @@ class IndexController extends BaseController {
         $tixian = M("tixian");
         unset($post['tx_card2']);
         unset($post['totel_money']);
+        unset($post['code']);
+        unset($post['parentid']);
         $post['tx_date'] = date('Y-m-d H:i:s');
         $isok = $tixian->add($post);
         if ($isok) {
             $user->where('user_id = "'.$post['tx_userid'].'"')->setDec('user_money', $post['tx_number']);
-            $this->success('提现成功');
+            $this->success('提现成功', U('index/index?parentid='.$parentid.'&code='.$code));
         } else {
             $this->error("提现失败");
         }
