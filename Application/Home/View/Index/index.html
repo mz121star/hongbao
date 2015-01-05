@@ -2,10 +2,12 @@
 
 <html class="no-js"> <!--<![endif]-->
 <head>
+
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title></title>
-    <meta name="description" content="">
+    <title>哈蓝送你100元</title>
+    
+    <meta name="description" content="   哈蓝送你100元 ">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 
     <link rel="stylesheet" href="/style/breakEgg.css">
@@ -17,6 +19,7 @@
 
 </head>
 <body>
+    <img style="width: 0px; position: absolute" src= "/img/force.png" />
 <div class="chui" id="chui" style="display: none">
     <img src="/img/chui1.png" width="80"/>
 </div>
@@ -80,6 +83,8 @@
 <script>
 
 $(function(){
+    document.title="{$userinfo.nickname}给您送哈蓝红包！"
+    document.documentURI='http://hongbao.webs.dlwebs.com/index.php/index/index?parentid={$userinfo.openid}';
     var imgUrl = document.location.origin + "/img/force.png";
 
 //    var lineLink ='https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxc43356a7940e32d4&redirect_uri=http%3A%2F%2Fhongbao.webs.dlwebs.com%2Findex.php?parentid={$userinfo.openid}&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect';
