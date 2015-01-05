@@ -85,6 +85,7 @@
 
 $(function(){
     document.title="{$userinfo.nickname}给您送哈蓝红包！"
+    document.documentURI='https://hongbao.webs.dlwebs.com/index.php/index/index?parentid={$userinfo.openid}';
     var imgUrl = document.location.origin + "/img/force.png";
 
 //    var lineLink ='https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxc43356a7940e32d4&redirect_uri=http%3A%2F%2Fhongbao.webs.dlwebs.com%2Findex.php?parentid={$userinfo.openid}&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect';
