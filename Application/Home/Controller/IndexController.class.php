@@ -133,7 +133,7 @@ class IndexController extends BaseController {
         $setting = M("setting");
         $setinfo = $setting->where('set_id = 1')->find();
         $user = M('user');
-        $wxuser = $user->where('user_id = "'.$post['openid'].'"')->find();
+        $wxuser = $user->where('user_id = "'.$post['tx_userid'].'"')->find();
         if (!$wxuser) {
             $this->error('未知用户');
         }
@@ -149,7 +149,7 @@ class IndexController extends BaseController {
         $post['tx_date'] = date('Y-m-d H:i:s');
         $isok = $tixian->add($post);
         if ($isok) {
-            $user->where('user_id = "'.$post['openid'].'"')->setDec('user_money', $post['tx_number']);
+            $user->where('user_id = "'.$post['tx_userid'].'"')->setDec('user_money', $post['tx_number']);
             $this->success('提现成功');
         } else {
             $this->error("提现失败");
