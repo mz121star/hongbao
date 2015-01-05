@@ -752,9 +752,9 @@ body {
     text-align: center;
     display: block;
     background-color: yellow;
-    height: 2.5rem;
+    height: 1.5rem;
     font-family: 微软雅黑;
-    font-size: 1.5rem;
+    font-size: 1rem;
     margin: 0;
     background-image: -moz-linear-gradient(top, #8fa1ff, #3757fa); /* Firefox */
     background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #ff4f02), color-stop(1, #8f2c00)); /* Saf4+, Chrome */
@@ -773,7 +773,7 @@ li{list-style: none}
     text-align: center;
     top: 32px;
     width: 100%;}
-.twocol{display: inline-block ;width: 40%;position:relative;border-radius: 10px}
+.twocol{display: inline-block ;width: 30%;position:relative;border-radius: 10px}
 .white{
     background-image: -moz-linear-gradient(top, #8fa1ff, #3757fa); /* Firefox */
     background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #F9F9F9), color-stop(1, #DFDFDF)); /* Saf4+, Chrome */

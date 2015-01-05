@@ -28,7 +28,7 @@
     <img class="yc" src="/img/YC.png"  />
     <div class="guize">
         <!--<a href="#">活动规则</a> -->
-        <ul>
+        <ul style="padding-left: 0">
             <foreach name="my_money_list" item="mymoney">
             <li>
                 <img width="40px" style="border-radius: 50px" src="{$mymoney.user_image}">
@@ -44,7 +44,7 @@
         <img src="/img/force.png" class="infopic">
         <div  class="qianshu">￥{$totel_money} </div>
         <div style="color: #fff; font-family: 微软雅黑">邀请好友参与，红包马上变大</div>
-        <div style="clear: both;height: 60px;margin-top: 10px">
+        <div style="clear: both;height: 38px;margin-top: 10px">
             <a class="guanzhu twocol" onclick="$('.zhongjiangtip').hide();$('#mcover').show();$('#mcover img').show()">邀请好友</a>
             <p class="guanzhu twocol white"><a style="color:red;vertical-align:middle" href="__MODULE__/index/tixian?openid={$userinfo.openid}">申请提现</a> </p>
         </div>
