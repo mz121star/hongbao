@@ -53,6 +53,9 @@ class IndexController extends BaseController {
 
         $userinfostr = file_get_contents("https://api.weixin.qq.com/sns/userinfo?access_token=".$access_token."&openid=".$openid."&lang=zh_CN");
         $userinfo = json_decode($userinfostr, true);
+        if (!isset($userinfo['openid']) || !$userinfo['openid']) {
+            $this->redirect('gotoOauth', array('parentid' => $parent));
+        }
 
         $money = M('money');
         $setting = M("setting");
