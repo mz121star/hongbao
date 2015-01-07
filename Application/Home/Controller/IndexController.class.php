@@ -22,7 +22,7 @@ class IndexController extends BaseController {
     
     public function gotoOauthAction() {
         $parent = I('get.parentid');
-        $redirect_url = urlencode('http://'.$_SERVER['SERVER_NAME'].'/index.php/index/index?parentid='.$parent);
+        $redirect_url = urlencode('http://'.$_SERVER['SERVER_NAME'].'/index.php/index/index?parentid='.$parent.'&from=singlemessage&isappinstalled=0');
         $gotourl = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid='.$this->app_id.'&redirect_uri='.$redirect_url.'&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect';
         redirect($gotourl);
     }
@@ -55,6 +55,7 @@ class IndexController extends BaseController {
         $userinfo = json_decode($userinfostr, true);
         if (!isset($userinfo['openid']) || !$userinfo['openid']) {
             $this->redirect('gotoOauth', array('parentid' => $parent));
+            session('refresh_token', null);
         }
 
         $money = M('money');
