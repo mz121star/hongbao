@@ -35,7 +35,7 @@ class IndexController extends BaseController {
             if (!$code) {
                 $this->redirect('gotoOauth', array('parentid' => $parent));
             }
-            $url ="https://api.weixin.qq.com/sns/oauth2/access_token?appid=".$this->app_id."&secret=".$this->app_secret."&code=".$code."&grant_type=authorization_code";
+            $url = "https://api.weixin.qq.com/sns/oauth2/access_token?appid=".$this->app_id."&secret=".$this->app_secret."&code=".$code."&grant_type=authorization_code";
             $json_content = file_get_contents($url);
             $json_obj = json_decode($json_content, true);
             $access_token = $json_obj['access_token'];
@@ -53,9 +53,9 @@ class IndexController extends BaseController {
 
         $userinfostr = file_get_contents("https://api.weixin.qq.com/sns/userinfo?access_token=".$access_token."&openid=".$openid."&lang=zh_CN");
         $userinfo = json_decode($userinfostr, true);
-        if (!isset($userinfo['openid']) || !$userinfo['openid']) {
-            $this->redirect('gotoOauth', array('parentid' => $parent));
+        if (!$userinfo['openid']) {
             session('refresh_token', null);
+            $this->redirect('gotoOauth', array('parentid' => $parent));
         }
 
         $money = M('money');
