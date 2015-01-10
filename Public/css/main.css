@@ -510,6 +510,18 @@ body {
     height: auto;
     z-index: 20001;
 }
+#mcover2 .zhongjiangtip{
+    position: fixed;
+    /* right: 28px; */
+    /* top: 25%; */
+    width: 100%!important;
+    height: auto!important;
+    z-index: 20001;
+    background-color: #FFFBB4;
+    border-radius: 10px;
+    color: rgb(132, 59, 59);
+    padding-top: 35px;
+}
 #mcover .zhongjiangtip{
     position: fixed;
     right: 28px;
