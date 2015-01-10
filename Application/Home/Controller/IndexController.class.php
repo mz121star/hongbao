@@ -28,7 +28,7 @@ class IndexController extends BaseController {
     }
 
     public function indexAction() {
-        $refresh_token = session('refresh_token');
+       /* $refresh_token = session('refresh_token');
         $parent = I('get.parentid');
         $code = I('get.code');
         if (!$refresh_token) {
@@ -56,7 +56,7 @@ class IndexController extends BaseController {
         if (!$userinfo['openid']) {
             session('refresh_token', null);
             $this->redirect('gotoOauth', array('parentid' => $parent));
-        }
+        }*/
 
         $money = M('money');
         $setting = M("setting");
