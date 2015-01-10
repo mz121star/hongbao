@@ -147,7 +147,7 @@ class IndexController extends BaseController {
         $user = M('user');
         $wxuser = $user->where('user_id = "'.$openid.'"')->find();
         if ($wxuser['user_money'] < $setinfo['set_getmoney']) {
-            $this->error($setinfo['set_getmoney']."都没有，还想泡哈蓝女神？（第一波2015.1.12~1.19）");
+            $this->error($setinfo['set_getmoney']."都没有，还想泡哈蓝女神？快去赚吧！（第一波2015.1.12~1.19）");
         }
         $this->assign('totel_money', $wxuser['user_money']);
         $this->assign('setinfo', $setinfo);
