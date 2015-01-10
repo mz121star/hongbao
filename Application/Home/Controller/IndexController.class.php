@@ -28,7 +28,7 @@ class IndexController extends BaseController {
     }
 
     public function indexAction() {
-       /* $refresh_token = session('refresh_token');
+        $refresh_token = session('refresh_token');
         $parent = I('get.parentid');
         $code = I('get.code');
         if (!$refresh_token) {
@@ -56,7 +56,7 @@ class IndexController extends BaseController {
         if (!$userinfo['openid']) {
             session('refresh_token', null);
             $this->redirect('gotoOauth', array('parentid' => $parent));
-        }*/
+        }
 
         $money = M('money');
         $setting = M("setting");
@@ -142,12 +142,12 @@ class IndexController extends BaseController {
         $untildate = strtotime($setinfo['set_untildate']);
         $now = time();
         if ($now > $untildate) {
-            $this->error('提现日期已截止');
+            $this->error('啊呀，你来迟了，哈蓝女神被人捋走了，一个不剩（不气馁，下期可累积继续）');
         }
         $user = M('user');
         $wxuser = $user->where('user_id = "'.$openid.'"')->find();
         if ($wxuser['user_money'] < $setinfo['set_getmoney']) {
-            $this->error("您账户金额小于可提现金额，账户金额大于".$setinfo['set_getmoney'].'时可提现');
+            $this->error($setinfo['set_getmoney']."都没有，还想泡哈蓝女神？（第一波2015.1.12~1.19）");
         }
         $this->assign('totel_money', $wxuser['user_money']);
         $this->assign('setinfo', $setinfo);
