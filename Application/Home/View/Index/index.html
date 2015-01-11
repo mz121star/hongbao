@@ -39,11 +39,11 @@
                     <img width="40px" style="border-radius: 50px" src="{$mymoney.user_image}">
 
                     <div class="qian">{$mymoney.money_number}元</div>
-                    <div>{$mymoney.user_name}</div>
+                    <div style="color: #ffffff">{$mymoney.user_name}</div>
                     <br>
 
-                    <div> {$mymoney.money_time}</div>
-                    <div>小手一抖 红包到手</div>
+                    <div style="color: #d58512;" > {$mymoney.money_time}</div>
+                    <div style="color: #ffffff">小手一抖 红包到手</div>
                 </li>
             </foreach>
         </ul>
@@ -53,7 +53,8 @@
         <img src="/img/force.png" class="infopic">
 
         <div class="qianshu">￥{$totel_money}</div>
-        <div style="color: #fff; font-family: 微软雅黑">邀请好友参与，红包马上变大</div>
+        <div style="color: #fff; font-family: 微软雅黑">转发链接邀请好友参与，红包立即合体变大！</div>
+        <div style="color: #fff; font-family: 微软雅黑">当红包达到168元时，可直接提现！</div>
         <div style="clear: both;height: 38px;margin-top: 10px">
             <a class="guanzhu twocol" onclick="$('.zhongjiangtip').hide();$('#mcover').show();$('#mcover img').show()">邀请好友</a>
 
