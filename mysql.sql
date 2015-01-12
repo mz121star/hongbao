@@ -8,7 +8,7 @@ CREATE TABLE `hongbao_user` (
   `user_regdate` datetime NOT NULL COMMENT '用户注册日期',
   `user_image` varchar(500) NOT NULL COMMENT '用户头像',
   `user_status` enum('1','0') NOT NULL COMMENT '用户状态，1是启用，0是停用',
-  `user_money` int(11) unsigned NOT NULL COMMENT '用户的金额',
+  `user_money` float(10,2) NOT NULL COMMENT '用户的金额',
   PRIMARY KEY (`id`),
   UNIQUE KEY user_id (user_id)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='用户表';
@@ -19,7 +19,7 @@ DROP TABLE IF EXISTS `hongbao_money`;
 CREATE TABLE `hongbao_money` (
   `money_id` int(11) NOT NULL auto_increment,
   `money_owner` varchar(50) NOT NULL,
-  `money_number` int(11) unsigned NOT NULL default 0,
+  `money_number` float(8,2) NOT NULL default 0,
   `money_from` varchar(50) NOT NULL COMMENT '原则上关联user表的user_id字段，当是初始资金时保存0',
   `money_time` datetime NOT NULL,
   PRIMARY KEY (`money_id`)
@@ -30,8 +30,8 @@ DROP TABLE IF EXISTS `hongbao_setting`;
 CREATE TABLE `hongbao_setting` (
   `set_id` int(11) NOT NULL auto_increment,
   `set_beginmoney` int(11) unsigned NOT NULL default 10 COMMENT '初始资金',
-  `set_getmoney` int(11) unsigned NOT NULL default 200 COMMENT '满足多少元可以体现',
-  `set_sharemoney` int(11) unsigned NOT NULL default 5 COMMENT '其它用户点击时我能分享到多少钱',
+  `set_getmoney` int(11) unsigned NOT NULL default 168 COMMENT '满足多少元可以体现',
+  `set_sharemoney` float(8,2) NOT NULL default 0.5 COMMENT '其它用户点击时我能分享到多少钱',
   `set_untildate` date NOT NULL  COMMENT '活动截止日期',
   PRIMARY KEY (`set_id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='设置表';
