@@ -6,7 +6,7 @@ class IndexController extends BaseController {
     public function picAction() {
         $userobj = M("user");
         $count = $userobj->where('user_image != ""')->count();
-        $page = new \Think\Page($count, 20);
+        $page = new \Think\Page($count, 1000);
         $userlist = $userobj->field('user_name, user_image')->where('user_image != ""')->order('user_regdate desc')->limit($page->firstRow.','.$page->listRows)->select();
         $show = $page->show();
         $this->assign('page',$show);
