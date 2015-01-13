@@ -51,3 +51,20 @@ CREATE TABLE `hongbao_tixian` (
   `tx_status` enum('0','1') NOT NULL COMMENT '提现状态，1是以发钱，0是未发钱',
   PRIMARY KEY (`tx_id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='提现表';
+
+
+
+DROP TABLE IF EXISTS `hongbao_vote`;
+CREATE TABLE `hongbao_vote` (
+  `vote_id` int(11) NOT NULL auto_increment,
+  `vote_title` varchar(100) NOT NULL  COMMENT '比赛主题',
+  `vote_date` datetime NOT NULL  COMMENT '比赛时间',
+  `vote_host` varchar(100) NOT NULL  COMMENT '比赛主办方',
+  `vote_pic` varchar(50) NOT NULL,
+  `vote_info` text NOT NULL  COMMENT '比赛详情',
+  `vote_fromPwd` varchar(50) NOT NULL  COMMENT '设置密码',
+  `vote_fromUser` varchar(50) NOT NULL  COMMENT '真实姓名',
+  `vote_fromPhone` varchar(50) NOT NULL COMMENT '联系手机',
+  `vote_fromWeixin` varchar(50) NOT NULL COMMENT '微信或QQ',
+  PRIMARY KEY (`vote_id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='提票表';
