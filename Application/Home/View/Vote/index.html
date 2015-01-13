@@ -43,7 +43,7 @@
 </header>
 <div class="height45"></div>
 
-
+<form action="__MODULE__/Vote/saveVote" id="voteform" method="post" enctype="multipart/form-data">
 <div class="warp apply_warp">
     <p class="explain">发布违法、反动内容或冒用他人、组织名义发布，将依据记录提交公安机关处理，请不要涉及敏感政治话题</p>
 
@@ -54,8 +54,9 @@
     <div class="apply_add2"><input class="txt1 " id="host" name="host" type="text" maxlength="50" required
                                    placeholder="比赛主办方、主办单位"></div>
     <div class="apply_add2">
-        <iframe id="fpicUp_k" class="fpicUp_k" name="weibo_send" marginwidth="0" marginheight="0"
-                src="/upload/fpic_up.html" frameborder="no" scrolling="no"></iframe>
+<!--        <iframe id="fpicUp_k" class="fpicUp_k" name="weibo_send" marginwidth="0" marginheight="0"
+                src="/upload/fpic_up.html" frameborder="no" scrolling="no"></iframe>-->
+        <input type="file" name="weibo_send" class="fpicUp_k" id="fpicUp_k">
     </div>
 
     <div class="apply_add2"><textarea class="txt1" id="info" name="info" required
@@ -64,18 +65,18 @@
                                    placeholder="设置密码，用于查看报名人员信息（必填）" value=""></div>
 
     <div class="apply_add2"><input class="txt1" id="fromUser" name="fromUser" type="text" maxlength="15" required
-                                   placeholder="你的真实姓名（必填，不对外公开）" value="苗壮"></div>
+                                   placeholder="你的真实姓名（必填，不对外公开）" value=""></div>
     <div class="apply_add2"><input class="txt1" id="fromPhone" name="fromPhone" type="text" maxlength="11" required
-                                   placeholder="你的联系手机（必填，不对外公开）" value="13840816169"></div>
+                                   placeholder="你的联系手机（必填，不对外公开）" value=""></div>
     <div class="apply_add2"><input class="txt1" id="fromWeixin" name="fromWeixin" type="text" maxlength="30" required
-                                   placeholder="你的微信或QQ（必填，不对外公开）" value="395802201"><input id="picUrl" name="picUrl"
+                                   placeholder="你的微信或QQ（必填，不对外公开）" value=""><input id="picUrl" name="picUrl"
                                                                                             type="hidden"/><input
             id="tid" name="tid" type="hidden" value="2"/></div>
 
     <a class="btn_mobile1 apply_sub" id="apply_add_on1" href="javascript:void(0); " onClick="match_add_save();">发 布</a>
     <a class="btn_mobile2 apply_sub" id="apply_add_on2" href="javascript:void(0); ">发 布</a>
 </div>
-
+</form>
 
 <div class="net_re" id="net_re"></div>
 
@@ -110,7 +111,6 @@
 
 
 <script type="text/javascript" src="/js/WeiXinOptionMenu.js"></script>
-
 
 </body>
 </html>

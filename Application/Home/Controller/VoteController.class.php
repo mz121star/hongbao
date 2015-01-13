@@ -10,4 +10,9 @@ class VoteController extends BaseController {
     public function indexAction() {
         $this->display();
     }
+    
+    public function saveVoteAction() {
+        echo '<pre>';
+        print_r($_FILES);exit;
+    }
 }

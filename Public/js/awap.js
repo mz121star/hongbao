@@ -980,8 +980,10 @@ function match_add_save() {
 	
 	$("#apply_add_on2").css("display","block");
 	$("#apply_add_on1").css("display","none");
+
+        $('#voteform').submit();return;
 	
-	$.post("match_add_save.do", {title:title,timeTxt:timeTxt,priceTxt:priceTxt,info:info,fromUser:fromUser,fromPwd:fromPwd,picUrl:picUrl,host:host,fromPhone:fromPhone,fromWeixin:fromWeixin},function(txt){tb_remove(),$("#net_re").html(txt);});
+	$.post("/index.php/vote/saveVote", {title:title,timeTxt:timeTxt,priceTxt:priceTxt,info:info,fromUser:fromUser,fromPwd:fromPwd,picUrl:picUrl,host:host,fromPhone:fromPhone,fromWeixin:fromWeixin},function(txt){tb_remove(),$("#net_re").html(txt);});
 }
 
 
