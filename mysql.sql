@@ -57,14 +57,14 @@ CREATE TABLE `hongbao_tixian` (
 DROP TABLE IF EXISTS `hongbao_vote`;
 CREATE TABLE `hongbao_vote` (
   `vote_id` int(11) NOT NULL auto_increment,
-  `vote_title` varchar(100) NOT NULL  COMMENT '比赛主题',
-  `vote_date` datetime NOT NULL  COMMENT '比赛时间',
-  `vote_host` varchar(100) NOT NULL  COMMENT '比赛主办方',
-  `vote_pic` varchar(50) NOT NULL,
-  `vote_info` text NOT NULL  COMMENT '比赛详情',
-  `vote_fromPwd` varchar(50) NOT NULL  COMMENT '设置密码',
-  `vote_fromUser` varchar(50) NOT NULL  COMMENT '真实姓名',
-  `vote_fromPhone` varchar(50) NOT NULL COMMENT '联系手机',
-  `vote_fromWeixin` varchar(50) NOT NULL COMMENT '微信或QQ',
+  `title` varchar(100) NOT NULL  COMMENT '比赛主题',
+  `timeTxt` varchar(100) NOT NULL  COMMENT '比赛时间',
+  `host` varchar(100) NOT NULL  COMMENT '比赛主办方',
+  `weibo_send` varchar(50) NOT NULL,
+  `info` text NOT NULL  COMMENT '比赛详情',
+  `fromPwd` varchar(50) NOT NULL  COMMENT '设置密码',
+  `fromUser` varchar(50) NOT NULL  COMMENT '真实姓名',
+  `fromPhone` varchar(50) NOT NULL COMMENT '联系手机',
+  `fromWeixin` varchar(50) NOT NULL COMMENT '微信或QQ',
   PRIMARY KEY (`vote_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='提票表';
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='投票表';
