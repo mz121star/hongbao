@@ -900,7 +900,7 @@ function match_add_save() {
 	var fromUser=$("#fromUser").val();
 	var fromPhone=$("#fromPhone").val();
 	var fromWeixin=$("#fromWeixin").val();
-	var fromPwd=$("#fromPwd").val();
+//	var fromPwd=$("#fromPwd").val();
 	var picUrl=$("#picUrl").val();
 	var host=$("#host").val();
 	
@@ -944,17 +944,17 @@ function match_add_save() {
        return (false);
     }
 	
-	if (fromPwd== "" || fromPwd == " " || fromPwd == "　") {
-       R("请正确输入密码");
-       return (false);
-    }
-	
-	if (fromPwd.length > 16 || fromPwd.length < 6) {
-       R("密码长度限制6-16位");
-       return (false);
-    }
-	
-	if (checkUser2(fromPwd)==false) return (false);
+//	if (fromPwd== "" || fromPwd == " " || fromPwd == "　") {
+//       R("请正确输入密码");
+//       return (false);
+//    }
+//	
+//	if (fromPwd.length > 16 || fromPwd.length < 6) {
+//       R("密码长度限制6-16位");
+//       return (false);
+//    }
+//	
+//	if (checkUser2(fromPwd)==false) return (false);
 	
 	if ( fromUser== "" || fromUser == " " || fromUser == "　") {
        R("请正确输入姓名");
@@ -981,9 +981,9 @@ function match_add_save() {
 	$("#apply_add_on2").css("display","block");
 	$("#apply_add_on1").css("display","none");
 
-        $('#voteform').submit();return;
+        $('#voteform').submit();
 	
-	$.post("/index.php/vote/saveVote", {title:title,timeTxt:timeTxt,priceTxt:priceTxt,info:info,fromUser:fromUser,fromPwd:fromPwd,picUrl:picUrl,host:host,fromPhone:fromPhone,fromWeixin:fromWeixin},function(txt){tb_remove(),$("#net_re").html(txt);});
+//	$.post("/index.php/vote/saveVote", {title:title,timeTxt:timeTxt,priceTxt:priceTxt,info:info,fromUser:fromUser,fromPwd:fromPwd,picUrl:picUrl,host:host,fromPhone:fromPhone,fromWeixin:fromWeixin},function(txt){tb_remove(),$("#net_re").html(txt);});
 }
 
 

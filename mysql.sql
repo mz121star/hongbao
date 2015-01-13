@@ -62,7 +62,6 @@ CREATE TABLE `hongbao_vote` (
   `host` varchar(100) NOT NULL  COMMENT '比赛主办方',
   `weibo_send` varchar(50) NOT NULL,
   `info` text NOT NULL  COMMENT '比赛详情',
-  `fromPwd` varchar(50) NOT NULL  COMMENT '设置密码',
   `fromUser` varchar(50) NOT NULL  COMMENT '真实姓名',
   `fromPhone` varchar(50) NOT NULL COMMENT '联系手机',
   `fromWeixin` varchar(50) NOT NULL COMMENT '微信或QQ',
