@@ -52,7 +52,7 @@ CREATE TABLE `hongbao_tixian` (
   PRIMARY KEY (`tx_id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='提现表';
 
-
+=================================================================================================
 
 DROP TABLE IF EXISTS `hongbao_vote`;
 CREATE TABLE `hongbao_vote` (
@@ -67,3 +67,22 @@ CREATE TABLE `hongbao_vote` (
   `fromWeixin` varchar(50) NOT NULL COMMENT '微信或QQ',
   PRIMARY KEY (`vote_id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='投票表';
+
+
+DROP TABLE IF EXISTS `hongbao_baoming`;
+CREATE TABLE `hongbao_baoming` (
+  `bm_id` int(11) NOT NULL auto_increment,
+  `username` varchar(100) NOT NULL  COMMENT '真实姓名',
+  `phone` varchar(100) NOT NULL  COMMENT '手机',
+  `weixin` varchar(100) NOT NULL  COMMENT '微信',
+  `province` varchar(50) NOT NULL,
+  `city` varchar(50) NOT NULL,
+  `weibo_send1` varchar(50) NOT NULL,
+  `weibo_send2` varchar(50) NOT NULL,
+  `weibo_send3` varchar(50) NOT NULL,
+  `matmv` varchar(50) NOT NULL  COMMENT '美拍、优酷视频，可粘贴视频网址',
+  `kouhao` varchar(50) NOT NULL COMMENT '参赛口号',
+  `beizhu` varchar(50) NOT NULL COMMENT '备注，附加说明',
+  `vote_id` int(11) unsigned NOT NULL COMMENT '报名所在投票',
+  PRIMARY KEY (`bm_id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='报名表';

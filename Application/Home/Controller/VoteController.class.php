@@ -19,6 +19,14 @@ class VoteController extends BaseController {
             $this->error("无此投票", U('vote/index'));
         }
         $this->assign('voteinfo', $voteinfo);
+
+        $baoming = M("baoming");
+        $count = $baoming->where('vote_id = "'.$voteid.'"')->count();
+        $page = new \Think\Page($count, 18);
+        $bmlist = $baoming->where('vote_id = "'.$voteid.'"')->limit($page->firstRow.','.$page->listRows)->select();
+        $show = $page->show();
+        $this->assign('page',$show);
+        $this->assign('bmlist', $bmlist);
         $this->display();
     }
     
@@ -51,6 +59,57 @@ class VoteController extends BaseController {
             $this->success('保存成功', U('vote/showVote', array('voteid'=>$voteid)));
         } else {
             $this->error("保存失败");
+        }
+    }
+
+    public function baomingAction() {
+        $voteid = I('get.voteid');
+        $this->assign('voteid', $voteid);
+        $this->display();
+    }
+
+    public function savebmAction() {
+        if ($_FILES['weibo_send1']['name']) {
+            $upload = new \Think\Upload();
+            $upload->maxSize = 3145728;//3M
+            $upload->exts = array('jpg', 'gif', 'png', 'jpeg');
+            $upload->rootPath = './upload/';
+            $uploadinfo = $upload->uploadOne($_FILES['weibo_send1']);
+            if(!$uploadinfo) {
+                $this->error($upload->getError());
+            }
+            $_POST['weibo_send1'] = $uploadinfo['savepath'].$uploadinfo['savename'];
+        }
+        if ($_FILES['weibo_send2']['name']) {
+            $upload = new \Think\Upload();
+            $upload->maxSize = 3145728;//3M
+            $upload->exts = array('jpg', 'gif', 'png', 'jpeg');
+            $upload->rootPath = './upload/';
+            $uploadinfo = $upload->uploadOne($_FILES['weibo_send2']);
+            if(!$uploadinfo) {
+                $this->error($upload->getError());
+            }
+            $_POST['weibo_send2'] = $uploadinfo['savepath'].$uploadinfo['savename'];
+        }
+        if ($_FILES['weibo_send3']['name']) {
+            $upload = new \Think\Upload();
+            $upload->maxSize = 3145728;//3M
+            $upload->exts = array('jpg', 'gif', 'png', 'jpeg');
+            $upload->rootPath = './upload/';
+            $uploadinfo = $upload->uploadOne($_FILES['weibo_send3']);
+            if(!$uploadinfo) {
+                $this->error($upload->getError());
+            }
+            $_POST['weibo_send3'] = $uploadinfo['savepath'].$uploadinfo['savename'];
+        }
+        $baoming = M("baoming");
+        $post = filterAllParam('post');
+        unset($post['area']);
+        $baomingid = $baoming->add($post);
+        if ($baomingid) {
+            $this->success('报名成功', U('vote/showVote', array('voteid'=>$post['vote_id'])));
+        } else {
+            $this->error("报名失败");
         }
     }
 }

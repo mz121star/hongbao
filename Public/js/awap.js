@@ -1,4 +1,4 @@
-﻿function o() {
+function o() {
 		var a = document.body,
 		b = document.documentElement;
 		return {
@@ -1020,34 +1020,25 @@ function match_Join_save() {
 	var city=$("#city").val();
 	var matmv=$("#matmv").val();
 	var wxsite=$("#wxsite").val();
-	var picUrl1=$("#picUrl1").val();
-	var picUrl2=$("#picUrl2").val();
-	var picUrl3=$("#picUrl3").val();
-	var picUrl4=$("#picUrl4").val();
-	var picUrl5=$("#picUrl5").val();
-	var picUrl6=$("#picUrl6").val();
-	var picUrl7=$("#picUrl7").val();
-	var picUrl8=$("#picUrl8").val();
-	var picUrl9=$("#picUrl9").val();
-	var picSite1=$("#picSite1").val();
-	var picSite2=$("#picSite2").val();
-	var picSite3=$("#picSite3").val();
-	var picSite4=$("#picSite4").val();
-	var picSite5=$("#picSite5").val();
-	var picSite6=$("#picSite6").val();
-	var picSite7=$("#picSite7").val();
-	var picSite8=$("#picSite8").val();
-	var picSite9=$("#picSite9").val();
+	var picUrl1=$("#fpicUp_k1").val();
+	var picUrl2=$("#fpicUp_k2").val();
+	var picUrl3=$("#fpicUp_k3").val();
+//	var picUrl4=$("#picUrl4").val();
+//	var picUrl5=$("#picUrl5").val();
+//	var picUrl6=$("#picUrl6").val();
+//	var picUrl7=$("#picUrl7").val();
+//	var picUrl8=$("#picUrl8").val();
+//	var picUrl9=$("#picUrl9").val();
+//	var picSite1=$("#picSite1").val();
+//	var picSite2=$("#picSite2").val();
+//	var picSite3=$("#picSite3").val();
+//	var picSite4=$("#picSite4").val();
+//	var picSite5=$("#picSite5").val();
+//	var picSite6=$("#picSite6").val();
+//	var picSite7=$("#picSite7").val();
+//	var picSite8=$("#picSite8").val();
+//	var picSite9=$("#picSite9").val();
 
-	if (aid=="" || isNaN(aid)) {
-       R("数据异常！");
-       return (false);
-    }
-	
-	if (netid=="" && isNaN(netid)) {
-       R("数据异常！");
-       return (false);
-    }
 	
 	if (username == "" || username.length > 10 || username.length < 2) {
        R("请正确输入真实姓名");
@@ -1097,8 +1088,8 @@ function match_Join_save() {
 	
 	$("#apply_add_on2").css("display","block");
 	$("#apply_add_on1").css("display","none");
-	
-	$.post("match_Join_save.do", {username:username,phone:phone,weixin:weixin,province:province,city:city,kouhao:kouhao,beizhu:beizhu,aid:aid,netid:netid,matmv:matmv,wxsite:wxsite,picUrl1:picUrl1,picUrl2:picUrl2,picUrl3:picUrl3,picUrl4:picUrl4,picUrl5:picUrl5,picUrl6:picUrl6,picUrl7:picUrl7,picUrl8:picUrl8,picUrl9:picUrl9,picSite1:picSite1,picSite2:picSite2,picSite3:picSite3,picSite4:picSite4,picSite5:picSite5,picSite6:picSite6,picSite7:picSite7,picSite8:picSite8,picSite9:picSite9},function(txt){tb_remove(),$("#net_re").html(txt);});
+	$("#baomingform").submit();
+//	$.post("match_Join_save.do", {username:username,phone:phone,weixin:weixin,province:province,city:city,kouhao:kouhao,beizhu:beizhu,aid:aid,netid:netid,matmv:matmv,wxsite:wxsite,picUrl1:picUrl1,picUrl2:picUrl2,picUrl3:picUrl3,picUrl4:picUrl4,picUrl5:picUrl5,picUrl6:picUrl6,picUrl7:picUrl7,picUrl8:picUrl8,picUrl9:picUrl9,picSite1:picSite1,picSite2:picSite2,picSite3:picSite3,picSite4:picSite4,picSite5:picSite5,picSite6:picSite6,picSite7:picSite7,picSite8:picSite8,picSite9:picSite9},function(txt){tb_remove(),$("#net_re").html(txt);});
 }
 
 

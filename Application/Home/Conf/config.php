@@ -15,7 +15,8 @@ $private_config = array(
                                                   'jxdetail/:jxid' => 'Index/jxdetail',
                                                   'jxzan/:jxid' => 'Index/jxzan',
                                                   'fav/:foodid' => 'Index/favfood',
-                                                  'weixin/:uid/:ac' => 'Index/send'
+                                                  'weixin/:uid/:ac' => 'Index/send',
+                                                  'baoming/:voteid' => 'Vote/baoming'
                                                   )
                         );
 
