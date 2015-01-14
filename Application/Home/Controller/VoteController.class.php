@@ -15,7 +15,10 @@ class VoteController extends BaseController {
         if (!$bmid) {
             echo '无此参赛人';exit;
         }
-        $userid = $this->userInfo['user_id'] || 'test';
+        $userid = $_SESSION['user_id'];
+        if (!$userid) {
+            echo '没有授权';exit;
+        }
         $piao = M("piao");
         $baoming = M("baoming");
         $bminfo = $baoming->where('bm_id = "'.$bmid.'"')->find();
@@ -47,9 +50,7 @@ class VoteController extends BaseController {
         $json_content = file_get_contents($url);
         $json_obj = json_decode($json_content, true);
         $openid = $json_obj['openid'];
-        $this->userInfo['user_id'] =$openid;
-        session('userinfo',$this->userInfo);
-
+        $_SESSION['user_id'] =$openid;
 
         session(array('name'=>'access_token_id', 'expire'=>$json_obj['expires_in']));
         session('refresh_token', $json_obj['refresh_token']);
