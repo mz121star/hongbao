@@ -16,6 +16,7 @@ class VoteController extends BaseController {
             echo '无此参赛人';exit;
         }
         $userid = $_SESSION['user_id'];
+        echo $userid;exit;
         if (!$userid) {
             echo $userid;exit;
         }
