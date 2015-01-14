@@ -4,7 +4,7 @@ $common_config = include APP_PATH.'Common/Conf/config.php';
 
 //私有配置
 $private_config = array(
-                        'SHOW_PAGE_TRACE' => false,
+                        'SHOW_PAGE_TRACE' => true,
                         'LAYOUT_ON' => false,
                         'URL_ROUTER_ON' => true,
                         'URL_CASE_INSENSITIVE' =>true,
@@ -16,7 +16,9 @@ $private_config = array(
                                                   'jxzan/:jxid' => 'Index/jxzan',
                                                   'fav/:foodid' => 'Index/favfood',
                                                   'weixin/:uid/:ac' => 'Index/send',
-                                                  'baoming/:voteid' => 'Vote/baoming'
+                                                  'baoming/:voteid' => 'Vote/baoming',
+                                                  'showvote/:voteid/:sortby' => 'Vote/showvote',
+                                                  'addpiao/:bmid' => 'Vote/addpiao',
                                                   )
                         );
 

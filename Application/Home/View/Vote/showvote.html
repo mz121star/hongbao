@@ -34,7 +34,7 @@ body{margin:0 auto;max-width:500px;}
 
 <header class="top box_shadow_1 clearfix">
 	<div class="top_btnL fl"><a href="javascript:void(0);" onClick="history.go(-1);">返回</a></div>
-    <div class="top_btnR2 fr"><a href="javascript:void(0);" onClick="location.href='match-join-2851-.html'">参赛</a></div>
+    <div class="top_btnR2 fr"><a href="javascript:void(0);" onClick="location.href='__MODULE__/baoming/{$voteinfo.vote_id}'">参赛</a></div>
     <p class="top_title">比赛投票</p>
 </header>
 <div class="height45"></div>
@@ -48,7 +48,7 @@ body{margin:0 auto;max-width:500px;}
 	 
      
        <h3 class="ex_title">{$voteinfo.title}</h3>
-       <div class="ex_suji clearfix"><ul><li>访问数217986</li><li>分享6105+</li><li>投票34614</li></ul></div>
+       <div class="ex_suji clearfix"><ul><!--<li>访问数217986</li>--><li>分享6105+</li><li>投票{$total_piao}</li></ul></div>
 	 
           <div class="ex_banner ex_txt4"><img src="/upload/{$voteinfo.weibo_send}" /></div>
      
@@ -61,22 +61,23 @@ body{margin:0 auto;max-width:500px;}
      
      <div class="ex_txt ex2_txt" id="info">{$voteinfo.info|nl2br}</div>
 
-     <a class="ex_btn" href="javascript:void(0);" onClick="location.href='__MODULE__/baoming/{$voteinfo.vote_id}'">我要参赛（已有145人参赛）</a>
+     <a class="ex_btn" href="javascript:void(0);" onClick="location.href='__MODULE__/baoming/{$voteinfo.vote_id}'">我要参赛（已有{$total_baoming}人参赛）</a>
      
-     <div class="search search3">
-         <form action="javascript:void(0)" method="post" name="form">
-     	    <input class="search_text" id="search_text" type="text" placeholder="请输入“参赛者姓名”搜索" maxlength="15" value="">
+<!--     <div class="search search3">
+         <form action="__MODULE__/vote/search" method="post" name="form" id="searchform">
+             <input type="hidden" name="vote_id" value="{$voteinfo.vote_id}">
+     	    <input class="search_text" id="search_text" name="search_text" type="text" placeholder="请输入“参赛者姓名”搜索" maxlength="15" value="">
             <input class="search_btn" type="submit" value="" onClick="match_user_search()">
          </form>
-     </div>
+     </div>-->
      
      <div class="match_search_con" id="match_search_con"></div>
    
      
      <div class="match_page clearfix" id="phsite">
           <ul>
-             <a href="javascript:void(0)" onClick="location.href='match-2851--1-1.html#phsite'"><li class="phsite_on"><div class="match_page_on"><div class="match_page_on1"></div></div>票数最多</li></a>
-             <a href="javascript:void(0)" onClick="location.href='match-2851--2-1.html#phsite'"><li class="">最新参赛</li></a>
+              <a href="javascript:void(0)" onClick="location.href='__MODULE__/showvote/{$voteinfo.vote_id}/piao'"><if condition="$sortby eq 'piao'"><li class="phsite_on"><div class="match_page_on"><div class="match_page_on1"></div></div>票数最多</li><else /><li class="">票数最多</li></if></a>
+              <a href="javascript:void(0)" onClick="location.href='__MODULE__/showvote/{$voteinfo.vote_id}/new'"><if condition="($sortby eq '') or ($sortby eq 'new')"><li class="phsite_on"><div class="match_page_on"><div class="match_page_on1"></div></div>最新参赛</li><else /><li class="">最新参赛</li></if></a>
           </ul>
      </div>
      
@@ -89,14 +90,25 @@ body{margin:0 auto;max-width:500px;}
        <foreach name="bmlist" item="baoming">
           <div class="picCon fl">
                <div class="picCon1"><a href="javascript:void(0)"><img src="/upload/{$baoming.weibo_send1}" width="226" height="300" /></a>
-                    <div class="picCon3"><div class="picCon3_1" onClick="location.href='match-pic-40465-1-1-0-.html'">索要TA微信</div></div>
+<!--                    <div class="picCon3"><div class="picCon3_1" onClick="location.href='match-pic-40465-1-1-0-.html'">索要TA微信</div></div>-->
                </div>
-               <div class="picCon2" id="div_tpsu_40465" onClick="location.href='match-pic-40465-1-1-0-.html'"><ul><li class="pli1"><span id="tpsu_40465">2919</span><span><img src="/images/sbg4.png" /></span></li><li class="pli2">{$baoming.username}<img src="/images/sbg3.png" /></li></ul></div>
+               <div class="picCon2" id="div_tpsu_40465" onClick="add_piao({$baoming.bm_id});"><ul><li class="pli1"><span id="piaoshu{$baoming.bm_id}">{$baoming.total_piao}</span><span><img src="/images/sbg4.png" /></span></li><li class="pli2">{$baoming.username}<img src="/images/sbg3.png" /></li></ul></div>
           </div>
       </foreach>
       
       <script>
 	     PicListAutoWidth();PicAutoSet();var t=setInterval("PicAutoSet()",600); 
+             function add_piao(piao) {
+                     $.post('__MODULE__/addpiao/'+piao, function (data) {
+                         if (data == '投票成功') {
+                            var oldpiao = $('#piaoshu'+piao).html();
+                            var newpiao = parseInt(oldpiao) + 1;
+                            $('#piaoshu'+piao).html(newpiao);
+                         } else {
+                             alert(data);
+                         }
+                     });
+                 }
       </script>
       
   </div>
@@ -118,7 +130,7 @@ body{margin:0 auto;max-width:500px;}
      
      
      <div class="btn_list">
-        <a class="btn_mobile1 apply" href="javascript:void(0);" onClick="location.href='__MODULE__/baoming/{$voteinfo.vote_id}'">我要参赛（已有145人参赛）</a>
+        <a class="btn_mobile1 apply" href="javascript:void(0);" onClick="location.href='__MODULE__/baoming/{$voteinfo.vote_id}'">我要参赛（已有{$total_baoming}人参赛）</a>
      </div>
 
   </div>    
@@ -170,20 +182,16 @@ body{margin:0 auto;max-width:500px;}
 <div class="footer2 gradient_7 box_shadow_1">
 	    <a href="javascript:void(0);" onClick="history.go(-1);"><div class="footer2_left fl">返回</div></a>
      <div class="fr">
-        <a href="javascript:void(0);" onClick="location.href='match-join-2851-.html'"><div class="footer2_right fl"><div class="footer2_right_2">参赛</div></div></a><a href="javascript:void(0);" onClick="location.href='apply-create.html';"><div class="footer2_right fl"><div class="footer2_right_2">发起</div></div></a><a href="javascript:void(0);" onClick="window.location.reload();"><div class="footer2_right fl"><div class="footer2_right_2">刷新</div></div></a>
+        <a href="javascript:void(0);" onClick="location.href='__MODULE__/baoming/{$voteinfo.vote_id}'"><div class="footer2_right fl"><div class="footer2_right_2">参赛</div></div></a><a href="javascript:void(0);" onClick="window.location.reload();"><div class="footer2_right fl"><div class="footer2_right_2">刷新</div></div></a>
      </div>
 </div>
 
 </div>
 
 
-<script type="text/javascript" src="../js/WeiXinOptionMenu.js"></script>
+<script type="text/javascript" src="/js/WeiXinOptionMenu.js"></script>
 
 
-   <div class="qcode">
-        <div class="qcode1" id="qcode1"></div>
-        <div class="qcode2">扫一扫，进入手机版</div>
-   </div>
    <script>qcodeSite('match')</script>
 <div class="none">
 <script src='http://w.cnzz.com/q_stat.php?id=1000517246&l=3' language='JavaScript'></script>

@@ -83,6 +83,19 @@ CREATE TABLE `hongbao_baoming` (
   `matmv` varchar(50) NOT NULL  COMMENT '美拍、优酷视频，可粘贴视频网址',
   `kouhao` varchar(50) NOT NULL COMMENT '参赛口号',
   `beizhu` varchar(50) NOT NULL COMMENT '备注，附加说明',
+  `baoming_date` datetime NOT NULL  COMMENT '报名日期',
+  `total_piao` int(11) unsigned NOT NULL  COMMENT '总票数',
   `vote_id` int(11) unsigned NOT NULL COMMENT '报名所在投票',
   PRIMARY KEY (`bm_id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='报名表';
+
+
+DROP TABLE IF EXISTS `hongbao_piao`;
+CREATE TABLE `hongbao_piao` (
+  `piao_id` int(11) NOT NULL auto_increment,
+  `bm_id` int(11) unsigned NOT NULL  COMMENT '被投票人id',
+  `toupiao_user` varchar(100) NOT NULL  COMMENT '投票人',
+  `piao_date` datetime NOT NULL  COMMENT '投票日期',
+  `vote_id` int(11) unsigned NOT NULL COMMENT '报名所在投票',
+  PRIMARY KEY (`piao_id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='票数表';

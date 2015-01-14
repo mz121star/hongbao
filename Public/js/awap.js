@@ -2276,13 +2276,13 @@ function match_tp_check2(a1,a2){
 
 
 function match_user_search(){
-  var aid=$("#aid").val();
+//  var aid=$("#aid").val();
   var search_text=$("#search_text").val();
 	
-  if (aid=="" || isNaN(aid)) {
-       R("数据异常！");
-       return (false);
-  }
+//  if (aid=="" || isNaN(aid)) {
+//       R("数据异常！");
+//       return (false);
+//  }
   
   if (search_text=="" || search_text.length<2 || search_text.length>15) {
        R("请正常输入参赛人！");
@@ -2290,10 +2290,10 @@ function match_user_search(){
   }
   
   $("#match_search_con").html("<div class='match_search_con_loading'></div>");
-  
-  url="match_user_search.do";
-	  
-  $.post(url, {aid:aid,search_text:search_text}, function(txt){tb_remove(),$("#match_search_con").html(txt);});
+  $('#searchform').submit();
+//  url="match_user_search.do";
+//	  
+//  $.post(url, {aid:aid,search_text:search_text}, function(txt){tb_remove(),$("#match_search_con").html(txt);});
 }
 
 /*投票结束*/

@@ -11,22 +11,62 @@ class VoteController extends BaseController {
         $this->display();
     }
     
+    public function addpiaoAction() {
+        $bmid = I('get.bmid');
+        if (!$bmid) {
+            echo '无此参赛人';exit;
+        }
+        $userid = $this->userInfo['user_id'] || 'test';
+        $piao = M("piao");
+        $baoming = M("baoming");
+        $bminfo = $baoming->where('bm_id = "'.$bmid.'"')->find();
+        if (!$bminfo) {
+            echo '查无此人';exit;
+        }
+        $istou = $piao->where('bm_id = "'.$bmid.'" and toupiao_user = "'.$userid.'"')->count();
+        if ($istou) {
+            echo '您已投过此人，不可重复投';exit;
+        }
+        
+        $piaoid = $piao->add(array('bm_id'=>$bmid, 'toupiao_user'=>$userid, 'piao_date'=>date('Y-m-d H:i:s'), 'vote_id'=>$bminfo['vote_id']));
+        if ($piaoid) {
+            $baoming->where('bm_id = "'.$bmid.'"')->setInc('total_piao', 1);
+            echo '投票成功';exit;
+        } else {
+            echo '投票失败';exit;
+        }
+    }
+    
     public function showVoteAction() {
         $vote = M("Vote");
         $voteid = I('get.voteid');
+        $sortby = I('get.sortby');
+
         $voteinfo = $vote->where('vote_id = "'.$voteid.'"')->find();
         if (!$voteinfo) {
             $this->error("无此投票", U('vote/index'));
         }
         $this->assign('voteinfo', $voteinfo);
+        
+        $piao = M("piao");
+        $total_piao = $piao->where('vote_id = "'.$voteid.'"')->count();
+        $this->assign('total_piao', $total_piao);
 
         $baoming = M("baoming");
+        if (!$sortby || $sortby == 'new') {
+            $orderby = 'baoming_date desc';
+        } else {
+            $orderby = 'total_piao desc';
+        }
         $count = $baoming->where('vote_id = "'.$voteid.'"')->count();
         $page = new \Think\Page($count, 18);
-        $bmlist = $baoming->where('vote_id = "'.$voteid.'"')->limit($page->firstRow.','.$page->listRows)->select();
+        $bmlist = $baoming->where('vote_id = "'.$voteid.'"')->limit($page->firstRow.','.$page->listRows)->order($orderby)->select();
         $show = $page->show();
-        $this->assign('page',$show);
+        $this->assign('page', $show);
+        $this->assign('total_baoming', $count);
         $this->assign('bmlist', $bmlist);
+
+        $this->assign('sortby', $sortby);
         $this->display();
     }
     
@@ -105,6 +145,7 @@ class VoteController extends BaseController {
         $baoming = M("baoming");
         $post = filterAllParam('post');
         unset($post['area']);
+        $post['baoming_date'] = date('Y-m-d H:i:s');
         $baomingid = $baoming->add($post);
         if ($baomingid) {
             $this->success('报名成功', U('vote/showVote', array('voteid'=>$post['vote_id'])));
