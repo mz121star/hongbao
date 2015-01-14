@@ -72,7 +72,7 @@ class VoteController extends BaseController {
             $json_content = file_get_contents($url);
             $json_obj = json_decode($json_content, true);
         }
-        $_SESSION['user_id'] =$json_obj;
+        $_SESSION['user_id'] = $json_obj['openid'];
         if (!$_SESSION['user_id']) {
             session('refresh_token', null);
             $this->redirect('gotoOauth', array('voteid' => $voteid));
