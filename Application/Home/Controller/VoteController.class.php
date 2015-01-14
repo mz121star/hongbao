@@ -17,7 +17,7 @@ class VoteController extends BaseController {
         }
         $userid = $_SESSION['user_id'];
         if (!$userid) {
-            echo '没有授权';exit;
+            echo $userid;exit;
         }
         $piao = M("piao");
         $baoming = M("baoming");
@@ -40,7 +40,6 @@ class VoteController extends BaseController {
     }
     
     public function showVoteAction() {
-
         require_once  APP_PATH."Common/Common/jssdk.php";
         $jssdk = new \JSSDK($this->app_id, $this->app_secret);
         $signPackage = $jssdk->GetSignPackage();
@@ -49,11 +48,11 @@ class VoteController extends BaseController {
         $url = "https://api.weixin.qq.com/sns/oauth2/access_token?appid=".$this->app_id."&secret=".$this->app_secret."&code=".$code."&grant_type=authorization_code";
         $json_content = file_get_contents($url);
         $json_obj = json_decode($json_content, true);
-        $openid = $json_obj['openid'];
-        $_SESSION['user_id'] =$openid;
+        $_SESSION['user_id'] =$json_obj;
 
         session(array('name'=>'access_token_id', 'expire'=>$json_obj['expires_in']));
         session('refresh_token', $json_obj['refresh_token']);
+
         $vote = M("Vote");
         $voteid = I('get.voteid');
         $sortby = I('get.sortby');
