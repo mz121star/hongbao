@@ -6,8 +6,16 @@ class VoteController extends BaseController {
     private $app_id = 'wxc43356a7940e32d4';
 
     private $app_secret = 'ec234926610a429dfaca36328af9b014';
+    
     public function indexAction() {
         $this->display();
+    }
+    
+    public function gotoOauthAction() {
+        $voteid = I('get.voteid');
+        $redirect_url = urlencode('http://'.$_SERVER['SERVER_NAME'].'/index.php/showvote/'.$voteid.'/piao?from=singlemessage&isappinstalled=0');
+        $gotourl = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid='.$this->app_id.'&redirect_uri='.$redirect_url.'&response_type=code&scope=snsapi_base&state=STATE&connect_redirect=1#wechat_redirect';
+        redirect($gotourl);
     }
     
     public function addpiaoAction() {
@@ -17,7 +25,7 @@ class VoteController extends BaseController {
         }
         $userid = $_SESSION['user_id'];
         if (!$userid) {
-            echo $userid;exit;
+            echo '没有授权';exit;
         }
         $piao = M("piao");
         $baoming = M("baoming");
@@ -40,23 +48,36 @@ class VoteController extends BaseController {
     }
     
     public function showVoteAction() {
+        $voteid = I('get.voteid');
+        $sortby = I('get.sortby');
+        
         require_once  APP_PATH."Common/Common/jssdk.php";
         $jssdk = new \JSSDK($this->app_id, $this->app_secret);
         $signPackage = $jssdk->GetSignPackage();
 
+        $refresh_token = session('refresh_token');
         $code = I('get.code');
-        $url = "https://api.weixin.qq.com/sns/oauth2/access_token?appid=".$this->app_id."&secret=".$this->app_secret."&code=".$code."&grant_type=authorization_code";
-        $json_content = file_get_contents($url);
-        $json_obj = json_decode($json_content, true);
-        $_SESSION['user_id'] =$json_obj;
-
-        session(array('name'=>'access_token_id', 'expire'=>$json_obj['expires_in']));
-        session('refresh_token', $json_obj['refresh_token']);
+        if (!$refresh_token) {
+            if (!$code) {
+                $this->redirect('gotoOauth', array('voteid' => $voteid));
+            }
+            $url = "https://api.weixin.qq.com/sns/oauth2/access_token?appid=".$this->app_id."&secret=".$this->app_secret."&code=".$code."&grant_type=authorization_code";
+            $json_content = file_get_contents($url);
+            $json_obj = json_decode($json_content, true);
+            session(array('name'=>'access_token_id', 'expire'=>$json_obj['expires_in']));
+            session('refresh_token', $json_obj['refresh_token']);
+        } else {
+            $url ="https://api.weixin.qq.com/sns/oauth2/refresh_token?appid=".$this->app_id."&grant_type=refresh_token&refresh_token=".$refresh_token;
+            $json_content = file_get_contents($url);
+            $json_obj = json_decode($json_content, true);
+        }
+        $_SESSION['user_id'] = $json_obj['openid'];
+        if (!$_SESSION['user_id']) {
+            session('refresh_token', null);
+            $this->redirect('gotoOauth', array('voteid' => $voteid));
+        }
 
         $vote = M("Vote");
-        $voteid = I('get.voteid');
-        $sortby = I('get.sortby');
-
         $voteinfo = $vote->where('vote_id = "'.$voteid.'"')->find();
         if (!$voteinfo) {
             $this->error("无此投票", U('vote/index'));
