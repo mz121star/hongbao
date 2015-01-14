@@ -40,7 +40,7 @@ class VoteController extends BaseController {
     public function showVoteAction() {
 
         require_once  APP_PATH."Common/Common/jssdk.php";
-        $jssdk = new JSSDK($this->app_id, $this->app_secret);
+        $jssdk = new \JSSDK($this->app_id, $this->app_secret);
         $signPackage = $jssdk->GetSignPackage();
 
         $code = I('get.code');
