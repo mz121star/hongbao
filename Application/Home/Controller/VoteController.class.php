@@ -24,9 +24,8 @@ class VoteController extends BaseController {
             echo '无此参赛人';exit;
         }
         $userid = $_SESSION['user_id'];
-        echo '<pre>';print_r($userid);exit;
         if (!$userid) {
-            echo $userid;exit;
+            echo '没有授权';exit;
         }
         $piao = M("piao");
         $baoming = M("baoming");
