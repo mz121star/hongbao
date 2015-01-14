@@ -37,7 +37,7 @@ class VoteController extends BaseController {
         }
     }
     
-    public function showVoteAction() {
+    public function showvoteAction() {
         $vote = M("Vote");
         $voteid = I('get.voteid');
         $sortby = I('get.sortby');
