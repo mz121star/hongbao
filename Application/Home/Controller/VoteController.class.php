@@ -24,7 +24,6 @@ class VoteController extends BaseController {
             echo '无此参赛人';exit;
         }
         $userid = $_SESSION['user_id'];
-        echo '<pre>';print_r($userid);exit;
         if (!$userid) {
             echo $userid;exit;
         }
@@ -71,10 +70,8 @@ class VoteController extends BaseController {
             $url ="https://api.weixin.qq.com/sns/oauth2/refresh_token?appid=".$this->app_id."&grant_type=refresh_token&refresh_token=".$refresh_token;
             $json_content = file_get_contents($url);
             $json_obj = json_decode($json_content, true);
-            $access_token = $json_obj['access_token'];
-            $openid = $json_obj['openid'];
         }
-        $_SESSION['user_id'] =$json_obj;
+        $_SESSION['user_id'] =$json_obj['openid'];
         if (!$_SESSION['user_id']) {
             session('refresh_token', null);
             $this->redirect('gotoOauth', array('voteid' => $voteid));
