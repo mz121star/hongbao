@@ -2,8 +2,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"> 
 <head>
 <title>{$voteinfo.title}</title>
-<meta name="keywords" content="“酵你好看”纤女郎魅力天使全国竞选大赛">
-<meta name="description" content="“酵你好看”纤女郎魅力天使全国竞选大赛">
+<meta name="keywords" content="{$voteinfo.title}">
+<meta name="description" content="“{$voteinfo.title}">
 <meta charset="utf-8">
 <meta name="viewport" content="target-densitydpi=get-target-densitydpi,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,width=device-width, user-scalable=no" />
 <meta name="apple-touch-fullscreen" content="no" />
@@ -19,7 +19,42 @@
 <script type="text/javascript" src="/js/awap.js"></script>
 <script type="text/javascript" language="javascript" src="/js/topHeight.js"></script>
 <script type="text/javascript" src="/js/weixin.js"></script>
+    <script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
 
+    <script >
+        wx.config({
+
+            appId: '{$signPackage.appId}', // 必填，公众号的唯一标识
+            timestamp: {$signPackage.timestamp}, // 必填，生成签名的时间戳
+            nonceStr:  '{$signPackage.nonceStr}', // 必填，生成签名的随机串
+            signature:  '{$signPackage.signature}',// 必填，签名，见附录1
+            jsApiList: [
+            "onMenuShareTimeline",
+           "onMenuShareAppMessage",
+            "onMenuShareQQ",
+            "onMenuShareWeibo"
+        ] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
+        });
+        wx.ready(function(){
+            var opt={
+                title: '{$voteinfo.title}', // 分享标题
+                desc: '{$voteinfo.title}', // 分享描述
+                link: '', // 分享链接
+
+                success: function () {
+                    // 用户确认分享后执行的回调函数
+                },
+                cancel: function () {
+                    // 用户取消分享后执行的回调函数
+                }
+            }
+            wx.onMenuShareTimeline(opt);
+            wx.onMenuShareAppMessage(opt);
+            wx.onMenuShareQQ(opt);
+            wx.onMenuShareWeibo(opt);
+        });
+
+    </script>
 
 <style>
 

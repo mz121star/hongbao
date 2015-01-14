@@ -37,7 +37,22 @@ class VoteController extends BaseController {
         }
     }
     
-    public function showvoteAction() {
+    public function showVoteAction() {
+
+        require_once  APP_PATH."Common/Common/jssdk.php";
+        $jssdk = new JSSDK($this->app_id, $this->app_secret);
+        $signPackage = $jssdk->GetSignPackage();
+
+        $code = I('get.code');
+        $url = "https://api.weixin.qq.com/sns/oauth2/access_token?appid=".$this->app_id."&secret=".$this->app_secret."&code=".$code."&grant_type=authorization_code";
+        $json_content = file_get_contents($url);
+        $json_obj = json_decode($json_content, true);
+        $openid = $json_obj['openid'];
+        $this->userInfo['user_id'] =$openid;
+
+
+        session(array('name'=>'access_token_id', 'expire'=>$json_obj['expires_in']));
+        session('refresh_token', $json_obj['refresh_token']);
         $vote = M("Vote");
         $voteid = I('get.voteid');
         $sortby = I('get.sortby');
@@ -51,7 +66,6 @@ class VoteController extends BaseController {
         $piao = M("piao");
         $total_piao = $piao->where('vote_id = "'.$voteid.'"')->count();
         $this->assign('total_piao', $total_piao);
-
         $baoming = M("baoming");
         if (!$sortby || $sortby == 'new') {
             $orderby = 'baoming_date desc';
@@ -65,7 +79,7 @@ class VoteController extends BaseController {
         $this->assign('page', $show);
         $this->assign('total_baoming', $count);
         $this->assign('bmlist', $bmlist);
-
+        $this->assign( 'signPackage',$signPackage);
         $this->assign('sortby', $sortby);
         $this->display();
     }

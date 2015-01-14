@@ -12,5 +12,6 @@ class BaseController extends Controller {
         $this->userInfo = session('userinfo');
         $this->assign('current_c', MODULE_NAME);
         $this->assign('current_a', ACTION_NAME);
+
     }
 }
