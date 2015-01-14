@@ -6,7 +6,6 @@ class VoteController extends BaseController {
     private $app_id = 'wxc43356a7940e32d4';
 
     private $app_secret = 'ec234926610a429dfaca36328af9b014';
-
     public function indexAction() {
         $this->display();
     }
@@ -49,6 +48,7 @@ class VoteController extends BaseController {
         $json_obj = json_decode($json_content, true);
         $openid = $json_obj['openid'];
         $this->userInfo['user_id'] =$openid;
+        session('userinfo',$this->userInfo);
 
 
         session(array('name'=>'access_token_id', 'expire'=>$json_obj['expires_in']));
