@@ -24,6 +24,7 @@ class VoteController extends BaseController {
             echo '无此参赛人';exit;
         }
         $userid = $_SESSION['user_id'];
+        echo '<pre>';print_r($userid);exit;
         if (!$userid) {
             echo $userid;exit;
         }
@@ -71,7 +72,7 @@ class VoteController extends BaseController {
             $json_content = file_get_contents($url);
             $json_obj = json_decode($json_content, true);
         }
-        $_SESSION['user_id'] =$json_obj['openid'];
+        $_SESSION['user_id'] =$json_obj;
         if (!$_SESSION['user_id']) {
             session('refresh_token', null);
             $this->redirect('gotoOauth', array('voteid' => $voteid));
