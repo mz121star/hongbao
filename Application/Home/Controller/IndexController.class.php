@@ -28,9 +28,9 @@ class IndexController extends BaseController {
     }
 
     public function indexAction() {
-        $refresh_token = session('refresh_token');
+      /*  $refresh_token = session('refresh_token');*/
         $parent = I('get.parentid');
-        $code = I('get.code');
+       /* $code = I('get.code');
         if (!$refresh_token) {
             if (!$code) {
                 $this->redirect('gotoOauth', array('parentid' => $parent));
@@ -49,14 +49,11 @@ class IndexController extends BaseController {
             $json_obj = json_decode($json_content, true);
             $access_token = $json_obj['access_token'];
             $openid = $json_obj['openid'];
-        }
+        }*/
 
-        $userinfostr = file_get_contents("https://api.weixin.qq.com/sns/userinfo?access_token=".$access_token."&openid=".$openid."&lang=zh_CN");
-        $userinfo = json_decode($userinfostr, true);
-        if (!$userinfo['openid']) {
-            session('refresh_token', null);
-            $this->redirect('gotoOauth', array('parentid' => $parent));
-        }
+        $userinfostr = file_get_contents("http://weishangcheng.webs.dlwebs.com/oauth.php?redirect_type=getinfo&return_url=http://weishangcheng.webs.dlwebs.com/oauthtest.php");
+        $userinfo = json_decode(urldecode($userinfostr), true);
+
 
         $money = M('money');
         $setting = M("setting");
