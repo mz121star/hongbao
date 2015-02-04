@@ -54,7 +54,7 @@ class IndexController extends BaseController {
        /* $userinfostr = file_get_contents("http://weishangcheng.webs.dlwebs.com/oauth.php?redirect_type=getinfo&return_url=http://weishangcheng.webs.dlwebs.com/oauthtest.php");
         echo $userinfostr;
         exit;*/
-        $userinfostr= $_POST["userinfo"];
+        $userinfostr=I('post.userinfo');
 
         $userinfo = json_decode(urldecode($userinfostr), true);
 
