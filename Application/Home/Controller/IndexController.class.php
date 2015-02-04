@@ -55,7 +55,7 @@ class IndexController extends BaseController {
         echo $userinfostr;
         exit;*/
         $userinfostr=I('post.userinfo');
-        echo $userinfostr;
+        echo urldecode($userinfostr);
         exit;
         $userinfo = json_decode(urldecode($userinfostr), true);
 
