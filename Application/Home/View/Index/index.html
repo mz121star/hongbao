@@ -76,6 +76,7 @@
     <img src="/img/share.png" style="display: none">
 
     <div class="zhongjiangtip">
+        <a href="http://mp.weixin.qq.com/s?__biz=MzA3NzIxMTQ2OA==&mid=202773383&idx=1&sn=f0838173b4ce97514482696937600ea5#rd">
         <if condition="$is_get_money eq 0">
             <p class="  p3 css4401D34FA9112B9D66D0782EE9A1D68F">恭喜{$userinfo.nickname}您获得<span class="yellow num3">{$setinfo.set_beginmoney}</span>元红包
             </p>
@@ -85,7 +86,7 @@
             </p>
         </if>
         <p class="  p3 css4401D34FA9112B9D66D0782EE9A1D68F">关注微信可申请提现</p>
-
+        </a>
         <p class="guanzhu"><a style="color:#fff;z-index:9999;display:inline-block"
                               href="http://mp.weixin.qq.com/s?__biz=MzA3NzIxMTQ2OA==&mid=202773383&idx=1&sn=f0838173b4ce97514482696937600ea5#rd">点此关注公众账户</a>
         </p>
@@ -99,7 +100,7 @@
     </p>
 
     <p>
-        第一波:2015.1.10~2015.1.17
+        第一波:2015.2.4~2015.2.27
     </p>
 
     <p>
@@ -115,7 +116,7 @@
     </p>
 
     <p>
-        3.奖励领取：点击 “哈蓝肌肤营养面膜“关注后即可按红包金额申请提现
+        3.奖励领取：点击 “全球美丽微商联盟“关注后即可按红包金额申请提现
     </p>
 
     <p>
@@ -139,7 +140,7 @@
     </p>
 
     <p>
-        9.本活动最终解释权归：广州市哈蓝生物科技有限公司 所有
+        9.本活动最终解释权归：全球美丽微商联盟 所有
     </p>
 
     <p>
@@ -162,10 +163,10 @@
 
             // 微信分享的数据
             var wxData = {
-                "appId": "wxc43356a7940e32d", // 服务号可以填写appId
+                "appId": "wxfb26ee89d6a6a12c", // 服务号可以填写appId
                 "imgUrl": 'http://hongbao.webs.dlwebs.com/img/force.png',
                 "link": 'http://weishangcheng.webs.dlwebs.com/oauth.php?redirect_type=getview&return_url=http://hongbao.webs.dlwebs.com/index.php/index/index?parentid={$userinfo.openid}',
-                "desc": 'hi，我是哈蓝女神护花大使{$userinfo.nickname}，送你哈蓝面膜百元红包大礼！',
+                "desc": 'hi，有钱就是任性，我是{$userinfo.nickname}，送你红包大礼！',
                 "title": "任性~钱多•速来，{$userinfo.nickname}让你华丽转身变土豪"
             };
 
