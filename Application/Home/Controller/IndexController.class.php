@@ -51,9 +51,11 @@ class IndexController extends BaseController {
             $openid = $json_obj['openid'];
         }*/
 
-        $userinfostr = file_get_contents("http://weishangcheng.webs.dlwebs.com/oauth.php?redirect_type=getinfo&return_url=http://weishangcheng.webs.dlwebs.com/oauthtest.php");
+       /* $userinfostr = file_get_contents("http://weishangcheng.webs.dlwebs.com/oauth.php?redirect_type=getinfo&return_url=http://weishangcheng.webs.dlwebs.com/oauthtest.php");
         echo $userinfostr;
-        exit;
+        exit;*/
+        $userinfostr= $_POST["userinfo"];
+
         $userinfo = json_decode(urldecode($userinfostr), true);
 
 
