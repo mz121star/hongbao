@@ -167,10 +167,9 @@
         <div class="add_box_main_btn"><a href="javascript:void(0);">保  存</a></div>
     </div>
 </section>
-<!--<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+ <script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
 <script>
-    alert('{$userinfo.nickname}');
-    alert('{$signPackage.signature}');
+
          var mainTitle="{$userinfo.nickname}邀请您参与考米家居开业大奖升级，礼品任性送活动！",
             mainDesc="{$userinfo.nickname}点第一个按钮输入姓名或者昵称都行，电话号码一定要留正确。",
             mainURL="http://hongbao.webs.dlwebs.com/index.php/Jizan/index?parentid={$userinfo.openid}",
@@ -201,11 +200,11 @@
             desc: mainDesc, // 分享描述
             imgUrl:mainImgUrl, // 分享图标
             success: function () {
-                alert("分享成功！");
+                tusi("分享成功！");
             },
             cancel: function () {
                 // 用户取消分享后执行的回调函数
-                alert("分享失败！");
+                tusi("分享失败！");
             }
         });
         wx.onMenuShareAppMessage({
@@ -217,18 +216,18 @@
             dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
             success: function () {
                 // 用户确认分享后执行的回调函数
-                alert("分享成功！");
+                tusi("分享成功！");
             },
             cancel: function () {
                 // 用户取消分享后执行的回调函数
-                alert("分享失败！");
+                tusi("分享失败！");
             }
         });
 
 
 
     });
-</script>-->
+
 
 <script>
     var zlStatus = 0;
@@ -315,45 +314,7 @@
     }
 
 
-    function onBridgeReady() {
-        var mainTitle="{$userinfo.nickname}邀请您参与考米家居开业大奖升级，礼品任性送活动！",
-                mainDesc="{$userinfo.nickname}点第一个按钮输入姓名或者昵称都行，电话号码一定要留正确。",
-                mainURL="http://hongbao.webs.dlwebs.com/index.php/Jizan/index?parentid={$userinfo.openid}",
-                mainImgUrl= "http://www.crosme.com/weixin/data/attachment/common/fa/common_840_uqQS8LwQ.jpg";
 
-        WeixinJSBridge.on("menu:share:timeline", function(e) {
-            var data = {
-                img_url:mainImgUrl,
-                img_width: "120",
-                img_height: "120",
-                link: mainURL,
-                desc: "",
-                title: mainTitle
-            };
-            WeixinJSBridge.invoke("shareTimeline", data, function(res) {
-
-            });
-        });
-
-        WeixinJSBridge.on('menu:share:appmessage', function(argv) {
-            WeixinJSBridge.invoke("sendAppMessage", {
-                img_url: mainImgUrl,
-                img_width: "120",
-                img_height: "120",
-                link: mainURL,
-                desc: mainDesc,
-                title: mainTitle
-            }, function(res) {
-
-            });
-        });
-
-
-    };
-
-    document.addEventListener('WeixinJSBridgeReady', function() {
-        onBridgeReady();
-    });
 
 </script>
 </body>
