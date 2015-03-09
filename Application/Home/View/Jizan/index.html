@@ -315,6 +315,54 @@
     }
 
 
+    function onBridgeReady() {
+
+
+        WeixinJSBridge.on("menu:share:timeline", function(e) {
+            var data = {
+                img_url:mainImgUrl,
+                img_width: "120",
+                img_height: "120",
+                link: mainURL,
+                desc: "",
+                title: mainTitle
+            };
+            WeixinJSBridge.invoke("shareTimeline", data, function(res) {
+                if(res.err_msg==="share_timeline:confirm" || res.err_msg==="share_timeline:ok"){
+                    $.get("http://www.crosme.com/weixin/plugin.php?id=tom_weixin_zl:ajax&act=share&act_id=1&zlkey=0&formhash=00a4b02b");
+                }
+            });
+        });
+
+        WeixinJSBridge.on('menu:share:appmessage', function(argv) {
+            WeixinJSBridge.invoke("sendAppMessage", {
+                img_url: mainImgUrl,
+                img_width: "120",
+                img_height: "120",
+                link: mainURL,
+                desc: mainDesc,
+                title: mainTitle
+            }, function(res) {
+                if(res.err_msg==="send_app_msg:confirm" || res.err_msg==="send_app_msg:ok"){
+                    $.get("http://www.crosme.com/weixin/plugin.php?id=tom_weixin_zl:ajax&act=share&act_id=1&zlkey=0&formhash=00a4b02b");
+                }
+            });
+        });
+
+        WeixinJSBridge.on("menu:share:weibo", function() {
+            WeixinJSBridge.invoke("shareWeibo", {
+                "content": mainDesc,
+                "url": wbmainURL
+            }, function(res) {
+                WeixinJSBridge.log(res.err_msg);
+            });
+        });
+
+    };
+
+    document.addEventListener('WeixinJSBridgeReady', function() {
+        onBridgeReady();
+    });
 
 </script>
 </body>
