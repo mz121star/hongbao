@@ -51,12 +51,13 @@ class JizanController extends BaseController {
             $openid = $json_obj['openid'];
         }
 
-     $userinfostr = file_get_contents("http://weishangcheng.webs.dlwebs.com/oauth.php?redirect_type=getinfo&return_url=http://weishangcheng.webs.dlwebs.com/oauthtest.php");
 
-        $userinfostr=I('post.userinfo');
-
-        $userinfo = json_decode(urldecode($userinfostr), true);
-
+        $userinfostr = file_get_contents("https://api.weixin.qq.com/sns/userinfo?access_token=".$access_token."&openid=".$openid."&lang=zh_CN");
+        $userinfo = json_decode($userinfostr, true);
+        if (!$userinfo['openid']) {
+            unset($_SESSION['refresh_token']);
+            gotoOauth('http://'.$_SERVER['SERVER_NAME'].'/oauth.php?return_url='.$return_url);
+        }
 
         /*    $money = M('money');
         $setting = M("setting");
