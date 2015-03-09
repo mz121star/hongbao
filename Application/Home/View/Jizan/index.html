@@ -166,12 +166,11 @@
         <div class="add_box_main_close"><a href="javascript:void(0);" onclick="hideAddBox();"></a></div>
         <div class="add_box_main_msg">请填写姓名手机号便于中奖后通知</div>
         <form id="add_form">
-            <div class="add_box_main_input"><input name="xm" id="xm" placeholder="请填写姓名" type="text"></div>
+            <div class="add_box_main_input"><input name="name" id="xm" placeholder="请填写姓名" type="text"></div>
             <div class="add_box_main_input">
-                <input name="tel" id="tel" placeholder="请填写手机号" type="text">
-                <input type="hidden" name="act" value="add">
-                <input type="hidden" name="act_id" value="1">
-                <input type="hidden" name="formhash" value="00a4b02b">
+                <input name="phone" id="tel" placeholder="请填写手机号" type="text">
+                <input type="hidden" name="openid" value="{$userinfo.openid}">
+
             </div>
         </form>
         <div class="add_box_main_btn"><a href="javascript:void(0);">保  存</a></div>
@@ -197,8 +196,15 @@
         $("#share_guide_box").remove();
     }
     function showAddBox(){
-        $(window).scrollTop(0);
-        $(".id_add_box").removeClass('box_hide');
+        var isjoin={$isjoin};
+        if(!isjoin){
+            $(window).scrollTop(0);
+            $(".id_add_box").removeClass('box_hide');
+        }
+        else{
+            alert("您已经参与了，直接分享让好友帮你助力！");
+        }
+
     }
     function hideAddBox(){
         $(".id_add_box").addClass('box_hide');
@@ -229,12 +235,13 @@
         submintStatus = 1;
         $.ajax({
             type: "GET",
-            url: "plugin.php?id=tom_weixin_zl:ajax",
+            url: "__MODULE__/Jinzan/join",
             data: $('#add_form').serialize(),
             success: function(msg){
-                submintStatus = 0;
-                tusi("参加成功");
-                setTimeout(function(){document.location = myurl;},1888);
+                alert(msg.message);
+               // submintStatus = 0;
+                //tusi("参加成功");
+              //  setTimeout(function(){document.location = myurl;},1888);
             }
         });
     });

@@ -103,6 +103,8 @@ class JizanController extends BaseController {
 
 
         $this->assign('code', $code);*/
+        $zanuser = M('jz_user');
+        $zanuser->where('openid = "'.$userinfo['openid'].'"')->find();
         //给分享给我的人加钱
         if ($parent && $parent != $userinfo['openid']) {
            /* $wxmoney = $money->where('money_owner = "'.$parent.'" and money_from = "'.$userinfo['openid'].'"')->find();
@@ -116,11 +118,35 @@ class JizanController extends BaseController {
                 }
             }*/
         }
+        if ($zanuser) {
+            $this->assign('isjoin',"1");
+        }else{
+            $this->assign('isjoin',"0");
+        }
+
         $this->assign('parentid', $parent);
         $this->assign('userinfo', $userinfo);
         $this->display();
     }
+    public  function  joinAction(){
+        $post = filterAllParam('post');
 
+        $user = M("jz_user");
+
+        $wxuser = $user->where('openid = "'.$post['openid'].'"')->find();
+        if (!$wxuser) {
+           $userid =$user->add($post);
+            if ($userid) {
+
+                $this->success('报名成功');
+            } else {
+                $this->error("报名参加失败");
+            }
+        }else{
+            $this->error("您已经在参与了");
+        }
+
+    }
     public function eventAction() {
         $fromUserName = I('post.fromUserName');
         $nickname = I('post.nickname');
