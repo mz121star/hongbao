@@ -28,7 +28,7 @@ class JizanController extends BaseController {
     }
 
     public function indexAction() {
-      /* $refresh_token = session('refresh_token');
+   $refresh_token = session('refresh_token');
         $parent = I('get.parentid');
          $code = I('get.code');
         if (!$refresh_token) {
@@ -58,7 +58,7 @@ class JizanController extends BaseController {
         $userinfo = json_decode(urldecode($userinfostr), true);
 
 
-        $money = M('money');
+        /*    $money = M('money');
         $setting = M("setting");
         $user = M('user');
         $setinfo = $setting->where('set_id = 1')->find();
