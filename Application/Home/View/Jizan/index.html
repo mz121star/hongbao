@@ -171,13 +171,14 @@
 <script>
 
 
+    //alert({$signPackage.appId}+"/"+{$signPackage.timestamp}+'/'+{$signPackage.nonceStr}+'/'+{$signPackage.signature});
     wx.config({
                 debug: false,
                 appId: '{$signPackage.appId}',
                 timestamp: {$signPackage.timestamp},
-                nonceStr: '{$signPackage.nonceStr}',
-              signature : '{$signPackage.signature}',
-              jsApiList:
+            nonceStr: '{$signPackage.nonceStr}',
+            signature : '{$signPackage.signature}',
+            jsApiList:
     [
         // 所有要调用的 API 都要加到这个列表中
         'checkJsApi',
@@ -186,79 +187,59 @@
         'onMenuShareQQ',//分享到ＱＱ
         'hideOptionMenu'//隐藏右上角菜单接口
     ]
-    });
-
+    })
+    ;
+    //alert({$signPackage.appId}+"/"+{$signPackage.timestamp}+"/"+{$signPackage.nonceStr}+"/"+{$signPackage.signature});
     wx.ready(function () {
-
-            //alert({$signPackage.appId}+"/"+{$signPackage.timestamp}+'/'+{$signPackage.nonceStr}+'/'+{$signPackage.signature});
-            wx.onMenuShareTimeline({
-                title: '{$userinfo.nickname}的澳洲198商城', // 分享标题
-                link: 'http://aozhou.webs.dlwebs.com/index.php?m=Index&a=index&father={$userinfo.openid}', // 分享链接
-                desc: '澳洲198商——90后大学生亲授21天从0－100万的销售神话', // 分享描述
-                imgUrl: 'http://aozhou.webs.dlwebs.com/static/images/egg.jpg', // 分享图标
-                success: function () {
-                    alert("分享成功！");
-                },
-                cancel: function () {
-                    // 用户取消分享后执行的回调函数
-                    alert("分享失败！");
-                }
-            });
-            wx.onMenuShareAppMessage({
-                title: '{$userinfo.nickname}的澳洲198商城', // 分享标题
-                desc: '澳洲198商——90后大学生亲授21天从0－100万的销售神话', // 分享描述
-                link: 'http://aozhou.webs.dlwebs.com/index.php?m=Index&a=index&father={$userinfo.openid}', // 分享链接
-                imgUrl: 'http://aozhou.webs.dlwebs.com/static/images/egg.jpg', // 分享图标
-                type: '', // 分享类型,music、video或link，不填默认为link
-                dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
-                success: function () {
-                    // 用户确认分享后执行的回调函数
-                    alert("分享成功！");
-                },
-                cancel: function () {
-                    // 用户取消分享后执行的回调函数
-                    alert("分享失败！");
-                }
-            });
-     /*   var mainTitle="{$userinfo.nickname}邀请您参与考米家居开业大奖升级，礼品任性送活动！",
-                mainDesc="{$userinfo.nickname}点第一个按钮输入姓名或者昵称都行，电话号码一定要留正确。",
-                mainURL="http://hongbao.webs.dlwebs.com/index.php/Jizan/index?parentid={$userinfo.openid}",
-                mainImgUrl= "http://www.crosme.com/weixin/data/attachment/common/fa/common_840_uqQS8LwQ.jpg";
-
+        //alert({$signPackage.appId}+"/"+{$signPackage.timestamp}+'/'+{$signPackage.nonceStr}+'/'+{$signPackage.signature});
         wx.onMenuShareTimeline({
-            title: mainTitle, // 分享标题
-            link:mainURL, // 分享链接
-            desc: mainDesc, // 分享描述
-            imgUrl:mainImgUrl, // 分享图标
+            title: '{$userinfo.nickname}的澳洲198商城', // 分享标题
+            link: 'http://aozhou.webs.dlwebs.com/index.php?m=Index&a=index&father={$user.$userinfo}', // 分享链接
+            desc: '澳洲198商——90后大学生亲授21天从0－100万的销售神话', // 分享描述
+            imgUrl: 'http://aozhou.webs.dlwebs.com/static/images/egg.jpg', // 分享图标
             success: function () {
-                tusi("分享成功！");
+                alert("分享成功！");
             },
             cancel: function () {
                 // 用户取消分享后执行的回调函数
-                tusi("分享失败！");
+                alert("分享失败！");
             }
         });
         wx.onMenuShareAppMessage({
-            title: mainTitle, // 分享标题
-            link:mainURL, // 分享链接
-            desc: mainDesc, // 分享描述
-            imgUrl:mainImgUrl, // 分享图标
+            title: '{$userinfo.nickname}的澳洲198商城', // 分享标题
+            desc: '澳洲198商——90后大学生亲授21天从0－100万的销售神话', // 分享描述
+            link: 'http://aozhou.webs.dlwebs.com/index.php?m=Index&a=index&father={$user.$userinfo}', // 分享链接
+            imgUrl: 'http://aozhou.webs.dlwebs.com/static/images/egg.jpg', // 分享图标
             type: '', // 分享类型,music、video或link，不填默认为link
             dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
             success: function () {
                 // 用户确认分享后执行的回调函数
-                tusi("分享成功！");
+                alert("分享成功！");
             },
             cancel: function () {
                 // 用户取消分享后执行的回调函数
-                tusi("分享失败！");
+                alert("分享失败！");
             }
-        });*/
-
-
+        });
+        /**
+         wx.onMenuShareQQ({
+			title: '{$user.nickname}的澳洲198商城', // 分享标题
+			desc: '澳洲198商——90后大学生亲授21天从0－100万的销售神话', // 分享描述
+			link: '{$signPackage.url}', // 分享链接
+			imgUrl: 'http://aozhou.webs.dlwebs.com/static/images/egg.jpg' // 分享图标
+			success: function () {
+			   // 用户确认分享后执行的回调函数
+			   alert("分享成功！");
+			},
+			cancel: function () {
+			   // 用户取消分享后执行的回调函数
+			   alert("分享失败！");
+			}
+		});
+         */
+        // 在这里调用 API
 
     });
-
 
 
     var zlStatus = 0;
