@@ -104,7 +104,7 @@ class JizanController extends BaseController {
 
         $this->assign('code', $code);*/
         $zanuser = M('jz_user');
-          $user= $zanuser->where('openid = "'.$userinfo['openid'].'"')->find();
+        $user= $zanuser->where('openid = "'.$userinfo['openid'].'"')->find();
         $top10= $zanuser->order('countzan desc')->limit(100)->select();
         //给分享给我的人加钱
         if ($parent && $parent != $userinfo['openid']) {
@@ -125,6 +125,7 @@ class JizanController extends BaseController {
         }else{
             $this->assign('isjoin',0);
         }
+        $this->assign('zanuser',$user);
         $this->assign('top10',$top10);
         $this->assign('parentid', $parent);
         $this->assign('userinfo', $userinfo);
