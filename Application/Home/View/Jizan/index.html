@@ -170,10 +170,6 @@
  <script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
 <script>
 
-         var mainTitle="{$userinfo.nickname}邀请您参与考米家居开业大奖升级，礼品任性送活动！",
-            mainDesc="{$userinfo.nickname}点第一个按钮输入姓名或者昵称都行，电话号码一定要留正确。",
-            mainURL="http://hongbao.webs.dlwebs.com/index.php/Jizan/index?parentid={$userinfo.openid}",
-            mainImgUrl= "http://www.crosme.com/weixin/data/attachment/common/fa/common_840_uqQS8LwQ.jpg";
 
     wx.config({
                 debug: false,
@@ -194,6 +190,11 @@
     //alert({$signPackage.appId}+"/"+{$signPackage.timestamp}+"/"+{$signPackage.nonceStr}+"/"+{$signPackage.signature});
     wx.ready(function () {
         //alert({$signPackage.appId}+"/"+{$signPackage.timestamp}+'/'+{$signPackage.nonceStr}+'/'+{$signPackage.signature});
+        var mainTitle="{$userinfo.nickname}邀请您参与考米家居开业大奖升级，礼品任性送活动！",
+                mainDesc="{$userinfo.nickname}点第一个按钮输入姓名或者昵称都行，电话号码一定要留正确。",
+                mainURL="http://hongbao.webs.dlwebs.com/index.php/Jizan/index?parentid={$userinfo.openid}",
+                mainImgUrl= "http://www.crosme.com/weixin/data/attachment/common/fa/common_840_uqQS8LwQ.jpg";
+
         wx.onMenuShareTimeline({
             title: mainTitle, // 分享标题
             link:mainURL, // 分享链接
