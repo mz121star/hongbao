@@ -118,10 +118,11 @@ class JizanController extends BaseController {
                 }
             }*/
         }
+        var_dump($zanuser);exit;
         if ($zanuser) {
-            $this->assign('isjoin',"1");
+            $this->assign('isjoin',1);
         }else{
-            $this->assign('isjoin',"0");
+            $this->assign('isjoin',0);
         }
 
         $this->assign('parentid', $parent);
