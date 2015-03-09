@@ -215,13 +215,11 @@
 
     var myurl = "http://www.crosme.com/weixin/plugin.php?id=tom_weixin_zl&act_id=1";
 
-    var submintStatus = 0;
+
     $(".add_box_main_btn").click( function () {
         var xm = $("#xm").val();
         var tel = $("#tel").val();
-        if(submintStatus == 1){
-            return false;
-        }
+
         if(xm == ""){
             tusi("请填写姓名");
             return false;
@@ -232,14 +230,14 @@
             return false;
         }
 
-        submintStatus = 1;
+
         $.ajax({
             type: "GET",
             url: "__MODULE__/Jinzan/join",
             data: $('#add_form').serialize(),
             success: function(msg){
                 alert(msg.message);
-               // submintStatus = 0;
+
                 //tusi("参加成功");
               //  setTimeout(function(){document.location = myurl;},1888);
             }
