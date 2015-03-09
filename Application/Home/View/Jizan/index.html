@@ -187,7 +187,7 @@
         'hideOptionMenu'//隐藏右上角菜单接口
     ]
     });
-    alert({$signPackage.appId}+"/"+{$signPackage.timestamp}+"/"+{$signPackage.nonceStr}+"/"+{$signPackage.signature});
+    alert('{$signPackage.appId}+"/"+{$signPackage.timestamp}+"/"+{$signPackage.nonceStr}+"/"+{$signPackage.signature}');
     wx.ready(function () {
         alert({$signPackage.appId}+"/"+{$signPackage.timestamp}+"/"+{$signPackage.nonceStr}+"/"+{$signPackage.signature});
         var mainTitle="{$userinfo.nickname}邀请您参与考米家居开业大奖升级，礼品任性送活动！",
