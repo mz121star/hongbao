@@ -196,7 +196,9 @@
         $("#share_guide_box").remove();
     }
     function showAddBox(){
+
         var isjoin={$isjoin};
+        alert(isjoin)
         if(isjoin){
             $(window).scrollTop(0);
             $(".id_add_box").removeClass('box_hide');
@@ -235,7 +237,7 @@
             return false;
         }
 
-
+        tusi("报名中...");
         $.ajax({
             type: "POST" ,
             url: "__MODULE__/Jizan/join",
@@ -244,7 +246,7 @@
         }).success(function(d){
             baominging=0;
                 tusi(d);
-
+            hideAddBox();
         });
     });
 

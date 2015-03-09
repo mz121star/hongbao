@@ -130,9 +130,7 @@ class JizanController extends BaseController {
     }
     public  function  joinAction(){
         $post = filterAllParam('post');
-
         $user = M("jz_user");
-
         $wxuser = $user->where('openid = "'.$post['openid'].'"')->find();
         if (!$wxuser) {
            $userid =$user->add($post);
