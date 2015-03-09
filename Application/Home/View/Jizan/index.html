@@ -167,7 +167,7 @@
         <div class="add_box_main_btn"><a href="javascript:void(0);">保  存</a></div>
     </div>
 </section>
-<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<!--<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
 <script>
     alert('{$userinfo.nickname}');
     alert('{$signPackage.signature}');
@@ -228,7 +228,7 @@
 
 
     });
-</script>
+</script>-->
 
 <script>
     var zlStatus = 0;
@@ -316,7 +316,10 @@
 
 
     function onBridgeReady() {
-
+        var mainTitle="{$userinfo.nickname}邀请您参与考米家居开业大奖升级，礼品任性送活动！",
+                mainDesc="{$userinfo.nickname}点第一个按钮输入姓名或者昵称都行，电话号码一定要留正确。",
+                mainURL="http://hongbao.webs.dlwebs.com/index.php/Jizan/index?parentid={$userinfo.openid}",
+                mainImgUrl= "http://www.crosme.com/weixin/data/attachment/common/fa/common_840_uqQS8LwQ.jpg";
 
         WeixinJSBridge.on("menu:share:timeline", function(e) {
             var data = {
@@ -328,9 +331,7 @@
                 title: mainTitle
             };
             WeixinJSBridge.invoke("shareTimeline", data, function(res) {
-                if(res.err_msg==="share_timeline:confirm" || res.err_msg==="share_timeline:ok"){
-                    $.get("http://www.crosme.com/weixin/plugin.php?id=tom_weixin_zl:ajax&act=share&act_id=1&zlkey=0&formhash=00a4b02b");
-                }
+
             });
         });
 
@@ -343,20 +344,10 @@
                 desc: mainDesc,
                 title: mainTitle
             }, function(res) {
-                if(res.err_msg==="send_app_msg:confirm" || res.err_msg==="send_app_msg:ok"){
-                    $.get("http://www.crosme.com/weixin/plugin.php?id=tom_weixin_zl:ajax&act=share&act_id=1&zlkey=0&formhash=00a4b02b");
-                }
+
             });
         });
 
-        WeixinJSBridge.on("menu:share:weibo", function() {
-            WeixinJSBridge.invoke("shareWeibo", {
-                "content": mainDesc,
-                "url": wbmainURL
-            }, function(res) {
-                WeixinJSBridge.log(res.err_msg);
-            });
-        });
 
     };
 
