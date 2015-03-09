@@ -46,7 +46,10 @@
                 <div class="left_btn"><a href="javascript:;" onclick="showAddBox()">报名自己抢</a></div>
             </li>
             <li>
-                <div class="right_btn"><a href="javascript:void(0);" onclick="zili();">助力李旭</a></div>
+                <div class="right_btn">
+                    <a href="javascript:void(0);" onclick="zili();">助力李旭</a>
+                    <a href="javascript:void(0);" onclick="showShareGuide();">我要分享</a>
+                </div>
             </li>
         </ul>
     </div>
@@ -126,34 +129,17 @@
             </tr>
             </thead>
             <tbody>
+            <volist name="top10" id="user">
+                <tr class=" top">
+                    <td>{$i}</td>
+                    <td>{$user.name}</td>
+                    <td>{$user.phone}</td>
+                    <td>{$user.countzan}</td>
+                </tr>
+            </volist>
 
-            <tr class=" top">
-                <td>1</td>
-                <td>吴***</td>
-                <td>139****1182</td>
-                <td>312</td>
-            </tr>
 
-            <tr class="two top">
-                <td>2</td>
-                <td>文***</td>
-                <td>158****0836</td>
-                <td>183</td>
-            </tr>
 
-            <tr class=" top">
-                <td>3</td>
-                <td>李***</td>
-                <td>186****9720</td>
-                <td>142</td>
-            </tr>
-
-            <tr class="two">
-                <td>4</td>
-                <td>黄***</td>
-                <td>135****2144</td>
-                <td>114</td>
-            </tr>
 
 
             </tbody>
