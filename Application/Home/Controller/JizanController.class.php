@@ -1,7 +1,7 @@
 <?php
 namespace Home\Controller;
 
-class ZhuliController extends BaseController {
+class JizanController extends BaseController {
 
     private $app_id = 'wxc43356a7940e32d4';
 
