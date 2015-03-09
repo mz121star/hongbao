@@ -235,14 +235,12 @@
         $.ajax({
             type: "POST" ,
             url: "__MODULE__/Jinzan/join",
-            data: $('#add_form').serialize(),
-            success: function(msg){
+            data: $('#add_form').serialize()
 
+        }).success(function(d){
 
+                tusi(d);
 
-                tusi("参加成功");
-              //  setTimeout(function(){document.location = myurl;},1888);
-            }
         });
     });
 

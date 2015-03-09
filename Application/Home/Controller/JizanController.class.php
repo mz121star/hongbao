@@ -138,12 +138,12 @@ class JizanController extends BaseController {
            $userid =$user->add($post);
             if ($userid) {
 
-                $this->success('报名成功');
+               echo '报名成功';
             } else {
-                $this->error("报名参加失败");
+                echo "报名参加失败";
             }
         }else{
-            $this->error("您已经在参与了");
+            echo "您已经在参与了";
         }
 
     }
