@@ -21,19 +21,22 @@ class JizanController extends BaseController {
     }
     
     public function gotoOauthAction() {
-        $parent = I('get.parentid');
+        $parent= I('get.parentid');
         $redirect_url = urlencode('http://'.$_SERVER['SERVER_NAME'].'/index.php/Jizan/index?parentid='.$parent.'&from=singlemessage&isappinstalled=0');
         $gotourl = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid='.$this->app_id.'&redirect_uri='.$redirect_url.'&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect';
         redirect($gotourl);
     }
 
     public function indexAction() {
-   $refresh_token = session('refresh_token');
-        $parent = I('get.parentid');
+         $refresh_token = session('refresh_token');
+        $parentid = I('get.parentid');
          $code = I('get.code');
+        require_once  APP_PATH."Common/Common/jssdk.php";
+        $jssdk = new \JSSDK($this->app_id, $this->app_secret);
+        $signPackage = $jssdk->GetSignPackage();
         if (!$refresh_token) {
             if (!$code) {
-                $this->redirect('gotoOauth', array('parentid' => $parent));
+                $this->redirect('gotoOauth', array('parentid' => $parentid));
             }
             $url = "https://api.weixin.qq.com/sns/oauth2/access_token?appid=".$this->app_id."&secret=".$this->app_secret."&code=".$code."&grant_type=authorization_code";
             $json_content = file_get_contents($url);
@@ -57,7 +60,7 @@ class JizanController extends BaseController {
         if (!$userinfo['openid']) {
             unset($_SESSION['refresh_token']);
 
-            $this->redirect('gotoOauth', array('parentid' => $parent));
+            $this->redirect('gotoOauth', array('parentid' => $parentid));
         }
 
         /*    $money = M('money');
@@ -106,28 +109,24 @@ class JizanController extends BaseController {
         $zanuser = M('jz_user');
         $user= $zanuser->where('openid = "'.$userinfo['openid'].'"')->find();
         $top10= $zanuser->order('countzan desc')->limit(100)->select();
-        //给分享给我的人加钱
-        if ($parent && $parent != $userinfo['openid']) {
-           /* $wxmoney = $money->where('money_owner = "'.$parent.'" and money_from = "'.$userinfo['openid'].'"')->find();
-            if (!$wxmoney) {
-//                $share_money = rand(1, $setinfo['set_sharemoney']);
-                $share_money = 0.1;
-                $data = array('money_owner'=>$parent, 'money_number'=>$share_money, 'money_from'=>$userinfo['openid'], 'money_time'=>date('Y-m-d H:i:s'));
-                $money_result = $money->add($data);
-                if ($money_result) {
-                    $user->where('user_id = "'.$parent.'"')->setInc('user_money', $share_money);
-                }
-            }*/
+
+        //如果当前页面链接中有邀请人，也就有parentid，则页面中是为他助力点赞
+        if ($parentid && $parentid != $userinfo['openid']) {
+            $parentuserinfo=$zanuser->where('openid = "'.$parentid.'"')->find();
         }
+        //如果页面链接中没有邀请人，也就意味着这是一个全新的链接，
 
         if ($user) {
             $this->assign('isjoin',1);
+
         }else{
             $this->assign('isjoin',0);
         }
+        $this->assign( 'signPackage',$signPackage);
+        $this->assign('parentuserinfo', $parentuserinfo);
         $this->assign('zanuser',$user);
         $this->assign('top10',$top10);
-        $this->assign('parentid', $parent);
+        $this->assign('parentid', $parentid);
         $this->assign('userinfo', $userinfo);
         $this->display();
     }
