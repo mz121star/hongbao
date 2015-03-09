@@ -104,7 +104,7 @@ class JizanController extends BaseController {
 
         $this->assign('code', $code);*/
         $zanuser = M('jz_user');
-        $zanuser->where('openid = "'.$userinfo['openid'].'"')->find();
+       $user= $zanuser->where('openid = "'.$userinfo['openid'].'"')->find();
         //给分享给我的人加钱
         if ($parent && $parent != $userinfo['openid']) {
            /* $wxmoney = $money->where('money_owner = "'.$parent.'" and money_from = "'.$userinfo['openid'].'"')->find();
@@ -118,8 +118,8 @@ class JizanController extends BaseController {
                 }
             }*/
         }
-        var_dump($zanuser);exit;
-        if ($zanuser) {
+
+        if ($user) {
             $this->assign('isjoin',1);
         }else{
             $this->assign('isjoin',0);
