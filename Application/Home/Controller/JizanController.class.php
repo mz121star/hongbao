@@ -107,12 +107,13 @@ class JizanController extends BaseController {
             }
         }
         $this->assign('my_money_list', $my_money_list);
-        $this->assign('userinfo', $userinfo);
+
         $this->assign('setinfo', $setinfo);
         $this->assign('totel_money', $totel_money);
         
         $this->assign('parentid', $parent);
         $this->assign('code', $code);*/
+        $this->assign('userinfo', $userinfo);
         $this->display();
     }
 
