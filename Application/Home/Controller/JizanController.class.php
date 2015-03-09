@@ -56,7 +56,8 @@ class JizanController extends BaseController {
         $userinfo = json_decode($userinfostr, true);
         if (!$userinfo['openid']) {
             unset($_SESSION['refresh_token']);
-            gotoOauth('http://'.$_SERVER['SERVER_NAME'].'/oauth.php?return_url='.$return_url);
+
+            $this->redirect('gotoOauth', array('parentid' => $parent));
         }
 
         /*    $money = M('money');
@@ -94,9 +95,17 @@ class JizanController extends BaseController {
             $wxuser = $user->where('user_id = "'.$userinfo['openid'].'"')->find();
             $totel_money = $wxuser['user_money'];
         }
+
+        $this->assign('my_money_list', $my_money_list);
+
+        $this->assign('setinfo', $setinfo);
+        $this->assign('totel_money', $totel_money);
+
+
+        $this->assign('code', $code);*/
         //给分享给我的人加钱
         if ($parent && $parent != $userinfo['openid']) {
-            $wxmoney = $money->where('money_owner = "'.$parent.'" and money_from = "'.$userinfo['openid'].'"')->find();
+           /* $wxmoney = $money->where('money_owner = "'.$parent.'" and money_from = "'.$userinfo['openid'].'"')->find();
             if (!$wxmoney) {
 //                $share_money = rand(1, $setinfo['set_sharemoney']);
                 $share_money = 0.1;
@@ -105,15 +114,9 @@ class JizanController extends BaseController {
                 if ($money_result) {
                     $user->where('user_id = "'.$parent.'"')->setInc('user_money', $share_money);
                 }
-            }
+            }*/
         }
-        $this->assign('my_money_list', $my_money_list);
-
-        $this->assign('setinfo', $setinfo);
-        $this->assign('totel_money', $totel_money);
-        
         $this->assign('parentid', $parent);
-        $this->assign('code', $code);*/
         $this->assign('userinfo', $userinfo);
         $this->display();
     }
