@@ -113,7 +113,7 @@ class JizanController extends BaseController {
         //如果当前页面链接中有邀请人，也就有parentid，则页面中是为他助力点赞
         if ($parentid /*&& $parentid != $userinfo['openid']*/) {
             $parentuserinfo=$zanuser->where('openid = "'.$parentid.'"')->find();
-           $paiming= $zanuser->where('countzan > "'.$parentuserinfo.'"')->count();
+           $paiming= $zanuser->where('countzan > "'.$parentuserinfo["countzan"].'"')->count();
 
         }
         //如果页面链接中没有邀请人，也就意味着这是一个全新的链接，
