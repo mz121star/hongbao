@@ -135,6 +135,7 @@ class JizanController extends BaseController {
         $zhuliuseropenid = I('post.zhuliuseropenid');
         $post = filterAllParam('post');
         $zhuli=M("jz_zhuli");
+        $user=M("jz_user");
         $zhuli->where('parentopenid = "'.$parentopenid.'" AND zhuliuseropenid="'.$zhuliuseropenid.'" ')->find();
         if($zhuli){
             echo '您已经帮他/她助力过啦！分享页面让好友为你助力吧！';
@@ -142,7 +143,7 @@ class JizanController extends BaseController {
         else{
             $zhuliid =$zhuli->add($post);
             if ($zhuliid) {
-
+                $user->where('openid = "'.$parentopenid.'"')->setInc('countzan', 1);
                 echo '助力成功了！分享页面让好友为你助力！';
             } else {
                 echo "莫名原因！助力失败,重新试试？";
