@@ -139,8 +139,8 @@ class JizanController extends BaseController {
     /*  echo $parentopenid;
         echo 'zz+'.$zhuliuseropenid;
         exit;*/
-        $zhuli->where('parentopenid = "'.$parentopenid.'" AND zhuliuseropenid="'.$zhuliuseropenid.'" ')->find();
-        if($zhuli){
+        $zhuliuser= $zhuli->where('parentopenid = "'.$parentopenid.'" AND zhuliuseropenid="'.$zhuliuseropenid.'" ')->find();
+        if($zhuliuser){
             echo '您已经帮他/她助力过啦！分享页面让好友为你助力吧！';
         }
         else{
