@@ -114,7 +114,9 @@ class JizanController extends BaseController {
         if ($parentid /*&& $parentid != $userinfo['openid']*/) {
             $parentuserinfo=$zanuser->where('openid = "'.$parentid.'"')->find();
            $paiming= $zanuser->where('countzan > "'.$parentuserinfo["countzan"].'"')->count();
-
+            if($paiming){
+                $paiming+=1;
+            }
         }
         //如果页面链接中没有邀请人，也就意味着这是一个全新的链接，
 
