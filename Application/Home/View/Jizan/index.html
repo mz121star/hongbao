@@ -170,8 +170,6 @@
  <script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
 <script>
 
-
-    //alert({$signPackage.appId}+"/"+{$signPackage.timestamp}+'/'+{$signPackage.nonceStr}+'/'+{$signPackage.signature});
     wx.config({
                 debug: false,
                 appId: '{$signPackage.appId}',
@@ -189,35 +187,41 @@
     ]
     });
     //alert({$signPackage.appId}+"/"+{$signPackage.timestamp}+"/"+{$signPackage.nonceStr}+"/"+{$signPackage.signature});
+    var mainTitle="{$userinfo.nickname}邀请您参与考米家居开业大奖升级，礼品任性送活动！",
+            mainDesc="{$userinfo.nickname}邀请您参与考米家居开业大奖升级，礼品任性送活动！",
+            mainURL="http://hongbao.webs.dlwebs.com/index.php/Jizan/index/parent={$userinfo.openid}",
+
+            mainImgUrl= "http://www.crosme.com/weixin/data/attachment/common/fa/common_840_uqQS8LwQ.jpg";
+
     wx.ready(function () {
        alert('{$signPackage.appId}+"/"+{$signPackage.timestamp}+"/"+{$signPackage.nonceStr}+"/"+{$signPackage.signature}');
         wx.onMenuShareTimeline({
-            title: '{$userinfo.nickname}的澳洲198商城', // 分享标题
-            link: 'http://aozhou.webs.dlwebs.com/index.php?m=Index&a=index&father={$userinfo.openid}', // 分享链接
-            desc: '澳洲198商——90后大学生亲授21天从0－100万的销售神话', // 分享描述
-            imgUrl: 'http://aozhou.webs.dlwebs.com/static/images/egg.jpg', // 分享图标
+            title:mainTitle, // 分享标题
+            link: mainURL, // 分享链接
+            desc: mainDesc, // 分享描述
+            imgUrl: mainImgUrl, // 分享图标
             success: function () {
-                alert("分享成功！");
+                tusi("分享成功！");
             },
             cancel: function () {
                 // 用户取消分享后执行的回调函数
-                alert("分享失败！");
+                tusi("分享失败！");
             }
         });
         wx.onMenuShareAppMessage({
-            title: '{$userinfo.nickname}的澳洲198商城', // 分享标题
-            desc: '澳洲198商——90后大学生亲授21天从0－100万的销售神话', // 分享描述
-            link: 'http://aozhou.webs.dlwebs.com/index.php?m=Index&a=index&father={$userinfo.openid}', // 分享链接
-            imgUrl: 'http://aozhou.webs.dlwebs.com/static/images/egg.jpg', // 分享图标
+            title:mainTitle, // 分享标题
+            link: mainURL, // 分享链接
+            desc: mainDesc, // 分享描述
+            imgUrl: mainImgUrl, // 分享图标
             type: '', // 分享类型,music、video或link，不填默认为link
             dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
             success: function () {
                 // 用户确认分享后执行的回调函数
-                alert("分享成功！");
+                tusi("分享成功！");
             },
             cancel: function () {
                 // 用户取消分享后执行的回调函数
-                alert("分享失败！");
+                tusi("分享失败！");
             }
         });
         /**
