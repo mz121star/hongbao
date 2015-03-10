@@ -52,7 +52,7 @@
                     <empty name="parentuserinfo">
                         <a href="javascript:void(0);" onclick="showShareGuide();">我要分享</a>
                         <else />
-                        <a href="javascript:void(0);" onclick="zili();">助力{$parentuserinfo.name}</a>
+                        <a href="javascript:void(0);" onclick="zili('{$parentuserinfo.openid}','{$userinfo.openid}');">助力{$parentuserinfo.name}</a>
                     </empty>
 
                 </div>
@@ -247,17 +247,19 @@
     });
 
 
-    var zlStatus = 0;
     function zili(){
-        if(zlStatus == 1){
-            tusi("已经助力");
+
+
+        tusi("强力助力中...");
+        $.ajax({
+            type: "POST" ,
+            url: "__MODULE__/Jizan/zhuli",
+            data: {"parentopenid":"{$parentuserinfo.openid}","zhuliuseropenid":"{$userinfo.openid}"}
+
+        }).success(function(d){
+            tusi(d);
             setTimeout(showShareGuide,1888);
-            return false;
-        }
-        zlStatus = 1;
-        tusi("已经助力");
-        setTimeout(showShareGuide,1888);
-        return false;
+        });
     }
     function showShareGuide(){
         $('body').append('<div id="share_guide_box" onclick="hideShareGuide();" style="z-index:99999999;position:fixed;left:0px;top:0px;width:100%;height:100%;background-color: rgba(0,0,0,0.5);text-align:right;" ontouchmove="return true;" ><img src="/zhuli/share.png" style="margin-top:10px;margin-right:10px;"></div>');
