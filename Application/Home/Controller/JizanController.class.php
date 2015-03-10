@@ -137,7 +137,7 @@ class JizanController extends BaseController {
         $zhuli=M("jz_zhuli");
         $user=M("jz_user");
       echo $parentopenid;
-        echo $zhuliuseropenid;
+        echo 'zz+'.$zhuliuseropenid;
         exit;
         $zhuli->where('parentopenid = "'.$parentopenid.'" AND zhuliuseropenid="'.$zhuliuseropenid.'" ')->find();
         if($zhuli){

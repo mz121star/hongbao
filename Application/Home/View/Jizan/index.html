@@ -254,7 +254,10 @@
         $.ajax({
             type: "POST" ,
             url: "__MODULE__/Jizan/zhuli",
-            data: {"parentopenid":"{$parentuserinfo.openid}","zhuliuseropenid":"{$userinfo.openid}"}
+            data: {
+                "parentopenid":'{$parentuserinfo.openid}',
+                "zhuliuseropenid":"{$userinfo.openid}"
+            }
 
         }).success(function(d){
             tusi(d);
