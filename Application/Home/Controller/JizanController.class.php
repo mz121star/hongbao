@@ -136,6 +136,9 @@ class JizanController extends BaseController {
         $post = filterAllParam('post');
         $zhuli=M("jz_zhuli");
         $user=M("jz_user");
+      echo $parentopenid;
+        echo $zhuliuseropenid;
+        exit;
         $zhuli->where('parentopenid = "'.$parentopenid.'" AND zhuliuseropenid="'.$zhuliuseropenid.'" ')->find();
         if($zhuli){
             echo '您已经帮他/她助力过啦！分享页面让好友为你助力吧！';
