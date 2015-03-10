@@ -138,7 +138,7 @@
                 <tr class=" top">
                     <td>{$i}</td>
                     <td>{$user.name}</td>
-                    <td>{$user.phone}</td>
+                    <td>{$user.phone|substr=0,7}****</td>
                     <td>{$user.countzan}</td>
                 </tr>
             </volist>
