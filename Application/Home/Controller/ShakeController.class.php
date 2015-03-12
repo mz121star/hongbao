@@ -40,7 +40,7 @@ class ShakeController extends BaseController
 
 
 //-------------------------------------------------------------------------------------------------------------------------
-        $packet = new Packet();
+        $packet = new \Packet();
         $refresh_token = session('refresh_token');
         $parentid = I('get.parentid');
         $code = I('get.code');
