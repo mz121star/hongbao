@@ -25,7 +25,9 @@ class ShakeController extends BaseController
     public function gotoOauthAction()
     {
         $parent = I('get.parentid');
+
         $redirect_url = urlencode('http://' . $_SERVER['SERVER_NAME'] . '/index.php/Shake/index?parentid=' . $parent . '&from=singlemessage&isappinstalled=0');
+        var_dump($redirect_url);exit;
         $gotourl = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid=' . $this->app_id . '&redirect_uri=' . $redirect_url . '&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect';
         redirect($gotourl);
     }
