@@ -6,6 +6,8 @@
     <meta charset="UTF-8">
     <title>简易模拟微信摇一摇</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+    <link href="/zhuli/style.css" rel="stylesheet" type="text/css">
+    <script src="/zhuli/jquery.js" type="text/javascript"></script>
     <style>
         * { margin: 0; padding: 0; }
         body { background: #292D2E; }
@@ -74,10 +76,28 @@
 <div id="hand" class="hand hand-animate"></div>
 <div id="loading" class="loading"></div>
 <div id="result" class="result">
-    <div class="pic"></div>
-    <div class="con">摇晃结果<br/>摇晃结果的其他信息哈哈哈</div>
+    <div class="pic"><img src="/images/20150312110642582_easyicon_net_256.png"></div>
+    <div class="con">恭喜您摇出了1元钱！<br/>分享给朋友一起来继续摇奖吧！</div>
 </div>
+<if condition="($isreg eq 1) ">
 
+    <section class="id_add_box add_box clearfix  ">
+        <div class="add_box_main clearfix">
+            <div class="add_box_main_close"><a href="javascript:void(0);" onclick="hideAddBox();"></a></div>
+            <div class="add_box_main_msg">请填写姓名手机号便于中奖后通知</div>
+            <form id="add_form">
+                <div class="add_box_main_input"><input name="name" id="xm" placeholder="请填写姓名" type="text"></div>
+                <div class="add_box_main_input">
+                    <input name="phone" id="tel" placeholder="请填写手机号" type="text">
+                    <input type="hidden" name="openid" value="{$userinfo.openid}">
+
+                </div>
+            </form>
+            <div class="add_box_main_btn"><a href="javascript:void(0);">保  存</a></div>
+        </div>
+    </section>
+    <else />
+</if>
 
 <script>
     var SHAKE_THRESHOLD = 800;

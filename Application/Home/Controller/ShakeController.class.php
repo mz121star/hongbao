@@ -128,13 +128,13 @@ class ShakeController extends BaseController
 //如果页面链接中没有邀请人，也就意味着这是一个全新的链接，
 
         if ($user&&isset($user['name'])&&isset($user['phone'])) {
-
+                $isreg=1;
         } else {
-
+                 $isreg=0;
         }
         $this->assign('signPackage', $signPackage);
 
-        $this->assign('zanuser', $user);
+        $this->assign('isreg', $isreg);
 
         $this->assign('parentid', $parentid);
         $this->assign('userinfo', $userinfo);
