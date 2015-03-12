@@ -1,7 +1,7 @@
 <?php
 namespace Home\Controller;
 
-class JizanController extends BaseController
+class ShakeController extends BaseController
 {
 
     private $app_id = 'wxad6a4df6a301fb4b';
