@@ -4,7 +4,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>简易模拟微信摇一摇</title>
+    <title>人人汇微信现金红包摇一摇，快来试试手气吧！</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
     <link href="/zhuli/style.css" rel="stylesheet" type="text/css">
     <script src="/zhuli/jquery.js" type="text/javascript"></script>
@@ -104,6 +104,68 @@
 </if>
 
 <script>
+    <script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<script>
+
+    wx.config({
+                debug: false,
+                appId: '{$signPackage.appId}',
+                timestamp: {$signPackage.timestamp},
+            nonceStr: '{$signPackage.nonceStr}',
+            signature : '{$signPackage.signature}',
+            jsApiList:
+    [
+        // 所有要调用的 API 都要加到这个列表中
+        'checkJsApi',
+        'onMenuShareTimeline',//分享到朋友圈
+        'onMenuShareAppMessage',//分享给朋友
+        'onMenuShareQQ',//分享到ＱＱ
+        'hideOptionMenu'//隐藏右上角菜单接口
+    ]
+    });
+    //alert({$signPackage.appId}+"/"+{$signPackage.timestamp}+"/"+{$signPackage.nonceStr}+"/"+{$signPackage.signature});
+    var mainTitle="人人汇现金红包摇一摇！",
+            mainDesc="快来试试手气吧！微信现金红包等你摇！！",
+            mainURL="http://hongbao.webs.dlwebs.com/index.php/Shake/index",
+
+            mainImgUrl= "http://www.crosme.com/weixin/data/attachment/common/fa/common_840_uqQS8LwQ.jpg";
+
+    wx.ready(function () {
+        // alert('{$signPackage.appId}+"/"+{$signPackage.timestamp}+"/"+{$signPackage.nonceStr}+"/"+{$signPackage.signature}');
+        wx.onMenuShareTimeline({
+            title:mainTitle, // 分享标题
+            link: mainURL, // 分享链接
+            desc: mainDesc, // 分享描述
+            imgUrl: mainImgUrl, // 分享图标
+            success: function () {
+                tusi("分享成功！");
+            },
+            cancel: function () {
+                // 用户取消分享后执行的回调函数
+                tusi("分享失败！");
+            }
+        });
+        wx.onMenuShareAppMessage({
+            title:mainTitle, // 分享标题
+            link: mainURL, // 分享链接
+            desc: mainDesc, // 分享描述
+            imgUrl: mainImgUrl, // 分享图标
+            type: '', // 分享类型,music、video或link，不填默认为link
+            dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
+            success: function () {
+                // 用户确认分享后执行的回调函数
+                tusi("分享成功！");
+            },
+            cancel: function () {
+                // 用户取消分享后执行的回调函数
+                tusi("分享失败！");
+            }
+        });
+
+
+    });
+
+
     <if condition="($isreg eq 1) ">
     var SHAKE_THRESHOLD = 800;
     var last_update = 0;
@@ -172,11 +234,13 @@
 
         if(xm == ""){
             tusi("请填写姓名");
+            baominging=0;
             return false;
         }
 
         if(tel == '' || !checkMobile(tel)){
             tusi("手机号格式不正确");
+            baominging=0;
             return false;
         }
 
@@ -190,6 +254,7 @@
             baominging=0;
             tusi(d);
             hideAddBox();
+            location.reload();
         });
     });
 </script>
