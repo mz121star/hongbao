@@ -145,11 +145,22 @@
             document.getElementById("loading").className = "loading";
         }, 1000);
     }
+
+    function checkMobile(s){
+        var regu =/^[1][3|8|4|5][0-9]{9}$/;
+        var re = new RegExp(regu);
+        if (re.test(s)) {
+            return true;
+        }else{
+            return false;
+        }
+    }
     var baominging=0;
     $(".add_box_main_btn").click( function () {
 
-
-
+        if(baominging==1)
+            return false;
+        baominging=1;
 
         var xm = $("#xm").val();
         var tel = $("#tel").val();
@@ -163,7 +174,7 @@
             tusi("手机号格式不正确");
             return false;
         }
-    alert("11");
+
         tusi("报名中...");
         $.ajax({
             type: "POST" ,
