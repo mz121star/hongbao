@@ -169,7 +169,7 @@ class ShakeController extends BaseController
     public function  joinAction()
     {
         $post = filterAllParam('post');
-        $user = M("jz_user");
+        $user = M("shake_user");
         $wxuser = $user->where('openid = "' . $post['openid'] . '"')->find();
         if (!$wxuser) {
             $userid = $user->add($post);
