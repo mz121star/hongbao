@@ -76,7 +76,7 @@ class ShakeController extends BaseController
 
             $this->redirect('gotoOauth', array('parentid' => $parentid));
         }
-       $packet->_route('wxpacket',array('openid'=>$userinfo['openid']));
+   //    $packet->_route('wxpacket',array('openid'=>$userinfo['openid']));
         /*    $money = M('money');
         $setting = M("setting");
         $user = M('user');
