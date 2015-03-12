@@ -135,7 +135,7 @@ class ShakeController extends BaseController
         $this->assign('signPackage', $signPackage);
 
         $this->assign('isreg', $isreg);
-
+        $this->assign('shakeuser',$user);
         $this->assign('parentid', $parentid);
         $this->assign('userinfo', $userinfo);
 
