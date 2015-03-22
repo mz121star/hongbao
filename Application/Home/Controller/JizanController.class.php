@@ -3,9 +3,9 @@ namespace Home\Controller;
 
 class JizanController extends BaseController {
 
-    private $app_id = 'wx1be694a33f90854a';
+    private $app_id = 'wxad6a4df6a301fb4b';
 
-    private $app_secret = 'b054afebd9f9efe2dc253dcc89645d0b';
+    private $app_secret = 'ece8f0acb68c7ad8765997fd79a72b5b';
 
     public function sendAction() {
         $userID = I('get.uid');

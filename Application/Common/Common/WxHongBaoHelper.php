@@ -127,9 +127,9 @@ class WxHongBaoHelper
 		curl_setopt($ch,CURLOPT_SSL_VERIFYHOST,false);	
 		
 		//cert 与 key 分别属于两个.pem文件
-		curl_setopt($ch,CURLOPT_SSLCERT,dirname(__FILE__).DIRECTORY_SEPARATOR.'zhengshu'.DIRECTORY_SEPARATOR.'apiclient_cert.pem');
- 		curl_setopt($ch,CURLOPT_SSLKEY,dirname(__FILE__).DIRECTORY_SEPARATOR.'zhengshu'.DIRECTORY_SEPARATOR.'apiclient_key.pem');
- 		curl_setopt($ch,CURLOPT_CAINFO,dirname(__FILE__).DIRECTORY_SEPARATOR.'zhengshu'.DIRECTORY_SEPARATOR.'rootca.pem');
+		curl_setopt($ch,CURLOPT_SSLCERT,dirname(__FILE__).DIRECTORY_SEPARATOR.'zhengshu/renrenhui'.DIRECTORY_SEPARATOR.'apiclient_cert.pem');
+ 		curl_setopt($ch,CURLOPT_SSLKEY,dirname(__FILE__).DIRECTORY_SEPARATOR.'zhengshu/renrenhui'.DIRECTORY_SEPARATOR.'apiclient_key.pem');
+ 		curl_setopt($ch,CURLOPT_CAINFO,dirname(__FILE__).DIRECTORY_SEPARATOR.'zhengshu/renrenhui'.DIRECTORY_SEPARATOR.'rootca.pem');
 
 	 
 		if( count($aHeader) >= 1 ){
